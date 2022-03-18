@@ -16,18 +16,23 @@ verify_user_name()
 
 int main(void)
 {
-	// 96 bytes = {0}
+	// 96 bytes in total stack frame ////////////
+    char user_pass[64] = {0}; // $esp+0x1c
+    int ret = 0;              // $esp+0x5c
+    int size;                 // esp+0x4
+    int stream;               // esp+0x8
+
 	puts("********* ADMIN LOGIN PROMPT *********");
 	printf("Enter Username: ");
 	fgets(a_user_name, 256, stdin);
-	if (verify_user_name() != 0)
+	if ((ret = verify_user_name()) != 0)
 	{
 		puts("nope, incorrect username...\n");
 		return(1);
 	}
 	puts("Enter Password: ");
-	fgets(___, 100, stdin);
-	if (verify_user_pass() != 0)
+	fgets(user_pass, 100, stdin);
+	if ((ret = verify_user_pass()) != 0)
 	{
 		puts("nope, incorrect password...\n");
 		return(1);
