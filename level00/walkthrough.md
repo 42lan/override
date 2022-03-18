@@ -1,5 +1,5 @@
 ## TLTR;
-Hard coded value.
+The program uses hard-coded constants.
 ***
 
 Log into level00

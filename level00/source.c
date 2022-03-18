@@ -9,8 +9,8 @@ int main(void)
 	puts("* \t     -Level00 -\t\t  *");
 	puts("***********************************");
 	printf("Password:");
-	scanf("%d", &input); // $esp+0x1c
-	if (input == 0x149c)
+	scanf("%d", &input);
+	if (input == 0x149c) // The program uses hard-coded constants
 	{
 		puts("\nAuthenticated!");
 		system("/bin/sh");
