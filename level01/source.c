@@ -2,21 +2,23 @@
 
 char a_user_name[100];
 
-verify_user_pass()
+int verify_user_pass(const char *user_pass)
 {
-	//0x80486b0:	 "admin"
+    COMPARE user_pass TO "admin"
+        return(0); // Valid password
+    return(1);     // Invalid password
 }
 
-verify_user_name()
+int verify_user_name(void)
 {
-	// 16 bytes
 	puts("verifying username....\n");
-	// 0x80486a8 = "dat_wil"
+    COMPARE a_user_name TO "dat_wil"
+        return(0); // Valid username
+    return(1);     // Invalid username
 }
 
 int main(void)
 {
-	// 96 bytes in total stack frame ////////////
     char user_pass[64] = {0}; // $esp+0x1c
     int ret = 0;              // $esp+0x5c
     int size;                 // esp+0x4
@@ -32,7 +34,7 @@ int main(void)
 	}
 	puts("Enter Password: ");
 	fgets(user_pass, 100, stdin);
-	if ((ret = verify_user_pass()) != 0)
+	if ((ret = verify_user_pass(user_pass)) != 0)
 	{
 		puts("nope, incorrect password...\n");
 		return(1);
