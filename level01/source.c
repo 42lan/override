@@ -27,14 +27,21 @@ int main(void)
 	puts("********* ADMIN LOGIN PROMPT *********");
 	printf("Enter Username: ");
 	fgets(a_user_name, 256, stdin);
-	if ((ret = verify_user_name()) != 0)
+	ret = verify_user_name();
+	if (ret != 0)
 	{
 		puts("nope, incorrect username...\n");
 		return(1);
 	}
 	puts("Enter Password: ");
 	fgets(user_pass, 100, stdin);
-	if ((ret = verify_user_pass(user_pass)) != 0)
+	ret = verify_user_pass(user_pass);
+
+    //  0x08048589 <+185>:	cmp    DWORD PTR [esp+0x5c],0x0
+    //  0x0804858e <+190>:	je     0x8048597 <main+199>
+    //  0x08048590 <+192>:	cmp    DWORD PTR [esp+0x5c],0x0
+    //  0x08048595 <+197>:	je     0x80485aa <main+218>
+	if (ret == 0 || ret != 0)
 	{
 		puts("nope, incorrect password...\n");
 		return(1);
