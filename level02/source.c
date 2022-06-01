@@ -8,6 +8,7 @@ int main()
   char username[] = {0};
   char password[] = {0};
   int len;
+  FILE *fd;
 
   fd = fopen("/home/users/level03/.pass", "r");
   if (fd == 0)
@@ -21,7 +22,7 @@ int main()
   if (len != 41)
   {
     fwrite("ERROR: failed to read password file\n", 1, 36, stderr);
-    fwrite("ERROR: failed to read password file\n", 1, 36, stderr);
+    //fwrite("ERROR: failed to read password file\n", 1, 36, stderr);
     exit(1);
   }
   fclose(fd);
@@ -41,7 +42,7 @@ int main()
   password[i] = '\0';
 
   puts("*****************************************");
-  if (strncmp(pass, password, 41) != 0)
+  if (strncmp(pass, password, 41) == 0)
   {
     printf("Greetings, %s!\n", username);
     system("/bin/sh");
