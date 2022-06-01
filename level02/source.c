@@ -8,14 +8,14 @@ int main()
   char username[] = {0};
   char password[] = {0};
 
-  fd = fopen("/home/users/level03/.pass", 'r');
+  fd = fopen("/home/users/level03/.pass", "r");
   if (fd == 0)
   {
     fwrite("ERROR: failed to open password file\n", 1, 24, stderr);
     exit(1);
   }
   fread(buff, 1, 41, fd);
-  if (strcspn(buff, '\n') != 41)
+  if (strcspn(buff, "\n") != 41)
   {
     fwrite("ERROR: failed to read password file\n", 1, 36, stderr);
     exit(1);
