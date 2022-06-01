@@ -26,20 +26,9 @@ level02: setuid setgid ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dyna
 ```
 It contains only one user defined function `main()`
 
-
-
-
-12 times
-0x40083d <main+41>:  rep stos QWORD PTR es:[rdi],rax
-0x7fffffffe510: 0x00000000      0x00000000      0x00000000      0x00000000
-0x7fffffffe520: 0x00000000      0x00000000      0x00000000      0x00000000
-0x7fffffffe530: 0x00000000      0x00000000      0x00000000      0x00000000
-0x7fffffffe540: 0x00000000      0x00000000      0x00000000      0x00000000
-0x7fffffffe550: 0x00000000      0x00000000      0x00000000      0x00000000
-0x7fffffffe560: 0x00000000      0x00000000      0x00000000      0x00000000
-
-
-0x40085d <main+73>:  rep stos QWORD PTR es:[rdi],rax
-0x7fffffffe4e0: 0x00000000      0x00000000      0x00000000      0x00000000
-0x7fffffffe4f0: 0x00000000      0x00000000      0x00000000      0x00000000
-0x7fffffffe500: 0x00000000      0x00000000      0x00000076      0x00000000
+Executable open a `.pass` file of `level03` and read 41 bytes of data from the stream pointed to by the `fd`, storing them at the location given by first pointer to `buff`.
+It replace last character `\n` with `\0` and check that letght of buffer is equal to 41.
+Then, it invite user to input username and password. So it reads in at most one less than 100 characters from `stdin` and stores them into the buffer pointed to by `username` and `password`. Once input is entered it replace `\n` with `\0`.
+Finally, it compares user's password to password read from the file. If it match, it open a new process runnign a shell.
+In case if password do not match, it ouputs username and message that it _does not have access!_.
+Here `printf()` is ussed is such way that input string is evaluated as a command by the application, which is know as (Format string attack)[https://owasp.org/www-community/attacks/Format_string_attack]. As the password still in the memory, it can be retrieved by passing to `printf()` a conversion specifier `%x`.
