@@ -2,11 +2,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void clear_stdin()
+{
+	buffer[24];
+	c = getchar();
+	if (c == 0xa)
+	else if (c == 0xff)
+}
+
+void get_unum()
+{
+	buffer[40];
+	fflush(stdout);
+	scanf("%u", &buffer);
+	clear_stdin();
+	return;
+}
+
+prog_timeout()
+{
+}
+
 void decrypt(int val)
 {
-	char buff[40]
+	char buff[64]
 
-	"Q}|u`sfg~sf{}|a3"
+	"Q}|u`sfg~sf{}|a3\0"
 
 	if ()
 		system("/bin/sh");
@@ -19,6 +40,7 @@ test()
 	char buff[40];
 
 	//if (?? 21)
+	//	ja     0x804884a <test+259>
 	else
 		decrypt(rand())
 }
@@ -32,7 +54,7 @@ int main(void)
 	puts("*\t\tlevel03\t\t**");
 	puts("***********************************");
 	printf("Password:");
-	scanf("%d", &buff);
+	scanf("%d", buff);
 	test(buff, 0x1337d00d);
 	return(0);
 }
