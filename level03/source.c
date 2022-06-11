@@ -14,13 +14,14 @@ void clear_stdin(void)
   } while (c != 0xff)
 }
 
-void get_unum()
+unsigned int get_unum(void)
 {
-	buffer[40];
+  unsigned int uint = 0;
+
 	fflush(stdout);
-	scanf("%u", &buffer);
+	scanf("%u", uint);
 	clear_stdin();
-	return;
+	return uint;
 }
 
 prog_timeout()
