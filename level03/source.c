@@ -53,14 +53,14 @@ test()
 
 int main(void)
 {
-	char buff[32];
+	int input;
 
 	srand(time(0));
 	puts("***********************************");
 	puts("*\t\tlevel03\t\t**");
 	puts("***********************************");
 	printf("Password:");
-	scanf("%d", buff);
-	test(buff, 0x1337d00d);
+	scanf("%d", input);
+	test(input, 0x1337d00d);
 	return(0);
 }
