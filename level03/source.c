@@ -2,12 +2,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void clear_stdin()
+void clear_stdin(void)
 {
-	buffer[24];
-	c = getchar();
-	if (c == 0xa)
-	else if (c == 0xff)
+  // buffer[24];
+  char c = 0;
+
+  do {
+    c = getchar();
+    if (c == '\n')
+      break ;
+  } while (c != 0xff)
 }
 
 void get_unum()
