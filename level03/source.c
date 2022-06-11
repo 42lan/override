@@ -41,14 +41,19 @@ void decrypt(int val)
 		puts("\nInvalid Password");
 }
 
-test()
+void test(const int input, 0x1337d00d)
 {
-	char buff[40];
-
-	//if (?? 21)
-	//	ja     0x804884a <test+259>
-	else
-		decrypt(rand())
+  // BUFFER[40];
+  // a = 0x1337d00e - input;
+  // ((input << 2) + 134514762)
+  switch ()
+  {
+    case 1 ... 15:
+      decrypt(input);
+      break ;
+    default:
+      decrypt(rand());
+  }
 }
 
 int main(void)
