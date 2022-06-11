@@ -24,8 +24,9 @@ unsigned int get_unum(void)
 	return uint;
 }
 
-prog_timeout()
+void prog_timeout(void)
 {
+  sys_exit(1);
 }
 
 void decrypt(int val)
