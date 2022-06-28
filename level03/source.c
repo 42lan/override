@@ -41,16 +41,16 @@ void decrypt(int val)
 		puts("\nInvalid Password");
 }
 
-void test(const int input, 0x1337d00d)
+void test(const int password, const int leetdood)
 {
-  // BUFFER[40];
-  // a = 0x1337d00e - input;
-  // ((input << 2) + 134514762)
-  switch ()
+	int x;
+
+	x = (leetdood - password) << 2;
+  switch (x)
   {
     case 1 ... 15:
-      decrypt(input);
-      break ;
+      decrypt(password);
+			break;
     default:
       decrypt(rand());
   }
