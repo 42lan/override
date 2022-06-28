@@ -58,14 +58,14 @@ void test(const int input, 0x1337d00d)
 
 int main(void)
 {
-	int input;
+	int password;
 
 	srand(time(0));
 	puts("***********************************");
 	puts("*\t\tlevel03\t\t**");
 	puts("***********************************");
 	printf("Password:");
-	scanf("%d", input);
-	test(input, 0x1337d00d);
+	scanf("%d", password);
+	test(password, 0x1337d00d);
 	return(0);
 }
