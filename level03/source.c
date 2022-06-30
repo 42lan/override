@@ -50,7 +50,7 @@ void test(const int password, const int leetdood)
   switch (x)
   {
     case 1 ... 15:
-      decrypt(password);
+      decrypt(x);
 			break;
     default:
       decrypt(rand());
