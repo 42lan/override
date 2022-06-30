@@ -29,13 +29,15 @@ void prog_timeout(void)
   sys_exit(1);
 }
 
-void decrypt(int val)
+void decrypt(int password)
 {
-	char buff[64]
+  int   i;
+  char  str[] = "Q}|u`sfg~sf{}|a3\0";
+  int   len = strlen(str);
 
-	"Q}|u`sfg~sf{}|a3\0"
-
-	if ()
+  for (i = 0; i < len; i++)
+    str[i] = len ^ str[i];
+	if (memcmp(str, "Congratulations!", 17) == 0)
 		system("/bin/sh");
 	else
 		puts("\nInvalid Password");
