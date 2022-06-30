@@ -49,7 +49,7 @@ void test(const int password, const int leetdood)
 	x = (leetdood - password) << 2;
   switch (x)
   {
-    case 1 ... 15:
+    case 1 ... 21:
       decrypt(x);
 			break;
     default:
