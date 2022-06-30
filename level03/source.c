@@ -4,7 +4,6 @@
 
 void clear_stdin(void)
 {
-  // buffer[24];
   char c = 0;
 
   do {
