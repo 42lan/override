@@ -28,14 +28,14 @@ void prog_timeout(void)
   sys_exit(1);
 }
 
-void decrypt(int password)
+void decrypt(int operand)
 {
   int   i;
   char  str[] = "Q}|u`sfg~sf{}|a3\0";
   int   len = strlen(str);
 
   for (i = 0; i < len; i++)
-    str[i] = len ^ str[i];
+    str[i] = operand ^ str[i];
 	if (memcmp(str, "Congratulations!", 17) == 0)
 		system("/bin/sh");
 	else
