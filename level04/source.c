@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <sys/wait.h>
 #include <signal.h>
+#include <linux/prctl.h>
 
 void clear_stdin(void)
 {
@@ -46,7 +47,7 @@ int main(void)
 
   if (pid == 0)
   {
-    prctl(1, 1);
+    prctl(PR_SET_PDEATHSIG, SIGHUP);
     ptrace(PT_TRACE_ME, NULL, NULL, NULL);
     puts("Give me some shellcode, k");
     gets(str);
