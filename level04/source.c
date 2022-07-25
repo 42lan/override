@@ -62,7 +62,7 @@ int main(void)
         puts("child is exiting...");
         return(0);
       }
-      ret = ptrace(PT_TRACE_ME, pid, 44, NULL);
+      ret = ptrace(PTRACE_PEEKUSR, pid, 44, NULL);
     } while (ret != 11);
     puts("no exec() for you");
     kill(pid, SIGKILL);
