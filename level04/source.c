@@ -47,7 +47,9 @@ int main(void)
 
   if (pid == 0)
   {
+    // Calling process (child) will get SIGHUP when parent dies (it becomes an orphan)
     prctl(PR_SET_PDEATHSIG, SIGHUP);
+    // Indicate that the process making this request should be traced
     ptrace(PT_TRACE_ME, NULL, NULL, NULL);
     puts("Give me some shellcode, k");
     gets(str);
