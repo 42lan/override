@@ -66,7 +66,7 @@ int main(void)
         return(0);
       }
       ret = ptrace(PTRACE_PEEKUSR, pid, 44, NULL);
-    } while (ret != 11);
+    } while (ret != 11); // syscall 0xb (11) = execve
     puts("no exec() for you");
     kill(pid, SIGKILL);
   }
