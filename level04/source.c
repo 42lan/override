@@ -59,8 +59,7 @@ int main(void)
     do
     {
       wait(&stat_loc);
-      if ((stat_loc & 127) == 0 && ((stat_loc & 127) + 1) >> 1) // 0x080487a6 <+222>:   sar                        al, 1
-                                                                //                      sar    ((stat_loc & 127) + 1), 1
+      if ((stat_loc & 127) == 0 || (char)((stat_loc & 0x7f) + 1) >> 1)
       {
         puts("child is exiting...");
         return(0);
