@@ -10,7 +10,6 @@
         \____/ |___/\___/_/  /_/ |_/_/\__,_/\___/
 
                        Good luck & Have fun
-
    To start, ssh with level00/level00 on 192.168.56.101:4242
 level04@192.168.56.101's password: kgv3tkEb9h2mLkRsPkXRfc2mHbjMxQzvb2FrgKkf
 
@@ -135,6 +134,17 @@ gdb-peda$ find "/bin/sh"
 Searching for '/bin/sh' in: None ranges
 Found 1 results, display max 1 items:
 libc : 0xf7f897ec ("/bin/sh")
+```
+
+Demonstartion in C of condition between `main+198` and `main+224`
+```c
+#include <stdio.h>
+
+int main(void)
+{
+  printf("0x%hhx\n", (char)((0x117f & 0x7f) + 1) >> 1);
+  return(0);
+}
 ```
 
 ## Exploit
