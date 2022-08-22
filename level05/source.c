@@ -8,12 +8,9 @@ int main(void)
 
 	i = -1;
 	fgets(str, 100, stdin);
-  while(str[i])
-	{
+  while(str[++i])
 		if (str[i] >= 'A' || str[i] <= 'Z')
 			str[i] ^= 0x20;
-		i++;
-	}
 	printf(str);
 	exit(0);
 }
