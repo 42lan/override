@@ -10,7 +10,7 @@ int main(void)
 	fgets(str, 100, stdin);
   while(str[++i])
 		if (str[i] >= 'A' || str[i] <= 'Z')
-			str[i] ^= 0x20;
+			str[i] ^= ' '; // 0x20;
 	printf(str);
 	exit(0);
 }
