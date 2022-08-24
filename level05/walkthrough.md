@@ -89,3 +89,13 @@ Input string starts with offset 10.
         [1]      [2]      [3]      [4]      [5]      [6]      [7]      [8]      [9]      [10]     [11]
 aaaabbbb00000064 f7fcfac0 f7ec3add ffffd6df ffffd6de 00000000 ffffffff ffffd764 f7fdb000 61616161 62626262
 ```
+
+Export [shellcode](http://shell-storm.org/shellcode/files/shellcode-811.php) into environment variables and  retrieve the address where it is lay.
+Devide the address per byte  and calculate for each number of characters that need to be printen by `%x` and written by `%n`.
+```
+0xffffdedb
+0xdb -> 0x0db-16 = 203
+0xde -> 0x1de-16-203 = 259
+0xff -> 0x1ff-16-259-203 = 33
+0xff -> 0x2ff-16-259-203-33 = 256
+```
