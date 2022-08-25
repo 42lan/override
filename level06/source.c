@@ -5,20 +5,36 @@
 #include <stdlib.h>
 #include <sys/ptrace.h>
 
-clear_stdin()
+void clear_stdin(void)
 {
+  char c = 0;
+
+  do {
+    c = getchar();
+    if (c == '\n')
+      break ;
+  } while (c != 0xff)
 }
 
-get_unum()
+unsigned int get_unum(void)
 {
+  unsigned int uint = 0;
+
+  fflush(stdout);
+  scanf("%u", &uint);
+  clear_stdin();
+  return(uint);
 }
 
-prog_timeout()
+void prog_timeout(void)
 {
+  sys_exit(1);
 }
 
-enable_timeout_cons()
+void enable_timeout_cons(void)
 {
+  signal(SIGALRM, &prog_timeout);
+  alarm(60);
 }
 
 auth()
