@@ -41,20 +41,31 @@ auth()
 {
 }
 
-int main(void)
+int main(int ac, char **av)
 {
-  buffer[80];
+  //initial_buffer[80];
+  char login[32];      //32 esp+0x2c;
+  unsigned int canary; //4
+  unsigned int serial; //4
 
+  canary = gs:0x14; //esp+0x4c = gs:0x14 = 0xe6be900; // Save value of canary. It is a random value from gs:0x14
   puts("***********************************");
   puts("*\t\tlevel06\t\t  *");
   puts("***********************************");
   printf("-> Enter Login: ");
-  fgets(login, 32, stdin);
+  fgets(login, 32, stdin); // $esp+0x2c = 0xffffd6dc = login
   puts("***********************************");
   puts("***** NEW ACCOUNT DETECTED ********");
   puts("***********************************");
   puts("-> Enter Serial: ");
-  //scanf("%u", 1);
-  //if (auth(login, 1) != 0)
-  //  return(1);
+  scanf("%u", &serial); // $esp+0x28 = serial = %esp+0x4
+  if (auth(login, serial) == 0)
+  {
+    puts("Authenticated!");
+    system("/bin/sh");
+    return(0);
+  }
+  if((canary ^ gs:0x14) != 0) // :( Check if the canary died (if the value was modified). It is the sign to evacuate from the mine!
+    __stack_chk_fail();
+  return(1);
 }
