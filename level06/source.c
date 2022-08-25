@@ -37,8 +37,26 @@ void enable_timeout_cons(void)
   alarm(60);
 }
 
-auth()
+int auth(char *login, unsigned int serial)
 {
+  buffer[40];
+
+  nl = strcspn(login, '\n');
+  login[nl] = '\0';
+
+  if (strnlen(login, ' ') > 5)
+  {
+    ret = ptrace(PTRACE_TRACEME, NULL, 1, NULL);
+    if(ret == -1)
+    {
+      puts("\033[32m.---------------------------.");
+      puts("\033[31m| !! TAMPERING DETECTED !!  |");
+      puts("\033[32m'---------------------------'");
+      return(1);
+    }
+    //login+3
+  }
+  return(1);
 }
 
 int main(int ac, char **av)
