@@ -41,7 +41,7 @@ int auth(char *login, unsigned int serial)
 {
   buffer[40];
 
-  nl = strcspn(login, '\n');
+  nl = strcspn(login, "\n");
   login[nl] = '\0';
 
   if (strnlen(login, ' ') > 5)
