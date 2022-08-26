@@ -63,16 +63,13 @@ int main(int ac, char **av, char **env)
 {
   buffer[464];
   int i;
-  char buffer[100] = {0};
+  char data[100] = {0};
 
-  esp+0x1c = av[1];
-  esp+0x18 = env[1];
   canary = gs:0x14; //esp+0x1cc
-
-  [...]
-  memset(av[0], 0, strlen(av[0]));
-
-  i = -1; //esp+0x14
+  i = -1;           //esp+0x14
+  while(av[++i])
+    memset(av[i], 0, strlen(av[i]));
+  i = -1;           //esp+0x14
   while(env[++i])
     memset(env[i], 0, strlen(env[i]));
   puts(
@@ -90,11 +87,18 @@ int main(int ac, char **av, char **env)
   do {
     printf("Input command: ");
     fgets(command, 20, stdin);
-    strlen(command);
+    //strlen(command);
     if(memcmp(command, "store", 5) == 0)
-      store_number(); // store_number(&number);
+      ret = store_number(&data);
     else if(memcmp(command, "read", 4) == 0)
+      ret = read_number(&data);
     else if(memcmp(command, "quit", 4) == 0)
+      break;
+    else
+      printf(" Failed to do %s command\n", command);
+
+    if(ret == 0)
+      printf(" Completed %s command successfully\n", command);
     else
       printf(" Failed to do %s command\n", command);
   }
