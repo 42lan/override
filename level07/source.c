@@ -27,20 +27,35 @@ void prog_timeout(void)
   sys_exit(1);
 }
 
-int store_number(void)
+int store_number(const char *data)
 {
-  buffer[40];
+  int index;
+  int number;
 
+  printf(" Number: ");
+  number = get_unum();
   printf(" Index: ");
-  index = get_unum(); //ebp-0xc
+  index = get_unum();
+  index = (index * 0xaaaaaaab) >> 1;
+  if()
+  {
+    puts(" *** ERROR! ***");
+    puts("   This index is reserved for wil!");
+    puts(" *** ERROR! ***");
+    return(1);
+  }
   return(0);
 }
 
-int read_number(void)
+int read_number(const char *data)
 {
+  int index;
+  int number;
+
   printf(" Index: ");
-  index = get_unum(); //ebp-0xc
-  printf(" Number at data[%u] is %u\n", );
+  index = get_unum();
+  number = data + (index << 2);
+  printf(" Number at data[%u] is %u\n", index, number);
   return(0);
 }
 
