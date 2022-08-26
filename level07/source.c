@@ -27,6 +27,15 @@ void prog_timeout(void)
   sys_exit(1);
 }
 
+int store_number(void)
+{
+  buffer[40];
+
+  printf(" Index: ");
+  index = get_unum(); //ebp-0xc
+  return(0);
+}
+
 int main(int ac, char **av, char **env)
 {
   buffer[464];
