@@ -54,7 +54,19 @@ int auth(char *login, unsigned int serial)
       puts("\033[32m'---------------------------'");
       return(1);
     }
-    //login+3
+    leetseeded = (login[3] ^ 0x1337) + 0x5eeded;
+
+    i = 0;
+    while(i < len)
+    {
+      if(login[i] <= 0x1f)
+        return(1);
+      //result += (((login[i] ^ leetseeded) * 0x88233b2b) % 0x539);
+      i++;
+    }
+
+    if(serial == result)
+      return(0);
   }
   return(1);
 }
