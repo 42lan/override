@@ -39,12 +39,11 @@ void enable_timeout_cons(void)
 
 int auth(char *login, unsigned int serial)
 {
-  buffer[40];
+  size_t len;
 
-  nl = strcspn(login, "\n");
-  login[nl] = '\0';
-
-  if (strnlen(login, ' ') > 5)
+  login[strcspn(login, "\n")] = '\0';
+  len = strnlen(login, ' ');
+  if(len > 5)
   {
     ret = ptrace(PTRACE_TRACEME, NULL, 1, NULL);
     if(ret == -1)
