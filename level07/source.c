@@ -36,6 +36,14 @@ int store_number(void)
   return(0);
 }
 
+int read_number(void)
+{
+  printf(" Index: ");
+  index = get_unum(); //ebp-0xc
+  printf(" Number at data[%u] is %u\n", );
+  return(0);
+}
+
 int main(int ac, char **av, char **env)
 {
   buffer[464];
