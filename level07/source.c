@@ -28,7 +28,7 @@ void prog_timeout(void)
   sys_exit(1);
 }
 
-int store_number(const char *data)
+int store_number(char *data)
 {
   int index = 0;
   int number = 0;
