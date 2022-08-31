@@ -9,7 +9,7 @@ void clear_stdin(void)
     c = getchar();
     if (c == '\n')
       break ;
-  } while (c != 0xff)
+  } while (c != 0xff);
 }
 
 unsigned int get_unum(void)
@@ -85,11 +85,11 @@ int main(int ac, char **av, char **env)
     "----------------------------------------------------\n"
     "   wil has reserved some storage :>                 \n"
     "----------------------------------------------------\n"
-  )
+  );
   do {
     printf("Input command: ");
     fgets(command, 20, stdin);
-    command[strlen(command) - 1] = '\0'
+    command[strlen(command) - 1] = '\0';
     if(memcmp(command, "store", 5) == 0)
       ret = store_number(&data);
     else if(memcmp(command, "read", 4) == 0)
