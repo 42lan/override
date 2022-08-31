@@ -29,21 +29,21 @@ void prog_timeout(void)
 
 int store_number(const char *data)
 {
-  int index;
-  int number;
+  int index = 0;
+  int number = 0;
 
   printf(" Number: ");
   number = get_unum();
   printf(" Index: ");
   index = get_unum();
-  index = (index * 0xaaaaaaab) >> 1;
-  if()
+  if((index % 3) == 0 || index >> 24 == 183)
   {
     puts(" *** ERROR! ***");
     puts("   This index is reserved for wil!");
     puts(" *** ERROR! ***");
     return(1);
   }
+  data[index << 2] = number;
   return(0);
 }
 
