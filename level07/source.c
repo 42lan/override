@@ -103,7 +103,8 @@ int main(int ac, char **av, char **env)
       printf(" Completed %s command successfully\n", command);
     else
       printf(" Failed to do %s command\n", command);
-  }
+    memset(command, 0, 20);
+  } while(true);
 
   // :( Check if the canary died (if the value was modified). It is the sign to evacuate from the mine!
   if((canary ^ gs:0x14) != 0)
