@@ -63,6 +63,7 @@ int main(int ac, char **av, char **env)
 {
   //buffer[464];
   int i;
+  int ret;
   unsigned int canary;
   char data[400] = {0};
   char command[20];
