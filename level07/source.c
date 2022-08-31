@@ -61,9 +61,11 @@ int read_number(const char *data)
 
 int main(int ac, char **av, char **env)
 {
-  buffer[464];
+  //buffer[464];
   int i;
-  char data[100] = {0};
+  unsigned int canary;
+  char data[400] = {0};
+  char command[20];
 
   canary = gs:0x14; //esp+0x1cc
   i = -1;           //esp+0x14
@@ -87,7 +89,7 @@ int main(int ac, char **av, char **env)
   do {
     printf("Input command: ");
     fgets(command, 20, stdin);
-    //strlen(command);
+    command[strlen(command) - 1] = '\0'
     if(memcmp(command, "store", 5) == 0)
       ret = store_number(&data);
     else if(memcmp(command, "read", 4) == 0)
