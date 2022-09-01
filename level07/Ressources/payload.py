@@ -9,10 +9,9 @@ parser.add_argument('--index', type=int, default=1, help='Read a number from the
 parser.add_argument('--value', type=int, default=0x41414141, help='Number to store into the data storage')
 
 args = parser.parse_args()
-with open('/tmp/payload', 'w+') as file:
-  for index in range(args.max):
-    print >>file, args.command
-    if(args.command == 'store'):
-      print >>file, args.value
-    print >>file, index
-  print >>file, 'quit'
+for index in range(args.max):
+  print args.command
+  if(args.command == 'store'):
+    print args.value
+  print index
+print 'quit'
