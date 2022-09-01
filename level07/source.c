@@ -111,5 +111,5 @@ int main(int ac, char **av, char **env)
   // :( Check if the canary died (if the value was modified). It is the sign to evacuate from the mine!
   if((canary ^ gs:0x14) != 0)
     __stack_chk_fail();
-
+  return(0);
 }
