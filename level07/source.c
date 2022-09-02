@@ -30,8 +30,8 @@ void prog_timeout(void)
 
 int store_number(char *data)
 {
-  int index = 0;
-  int number = 0;
+  unsigned int index = 0;
+  unsigned int number = 0;
 
   printf(" Number: ");
   number = get_unum();
@@ -50,8 +50,8 @@ int store_number(char *data)
 
 int read_number(const char *data)
 {
-  int index;
-  int number;
+  unsigned int index;
+  unsigned int number;
 
   printf(" Index: ");
   index = get_unum();
