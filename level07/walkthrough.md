@@ -89,7 +89,13 @@ level07@OverRide:~$ python -c "print(0xf7e45513)"
 level07@OverRide:~$ for i in {0..500}; do (echo read; echo $i; echo quit) | ./level07 | if [ $(grep -oE '[0-9]+$') -eq 4158936339 ]; then echo "EIP is on index $i"; fi; done
 EIP is on index 114
 ```
-``
+
+While reading/storing a number from data storage, the index is used to determine the absolute address from where to read/write strating from beggining of `data` array.
+```
+data[index<<2] = number
+```
+On writting to index 1 it will write to `data[1 << 2] = number`, same as `data[4] = number` .
+On writting to index 114 it will write to `data[114 << 2] = number`, same as `data[456] = number` .
 # Exploit
 ```shell
 ```
