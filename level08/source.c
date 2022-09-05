@@ -7,7 +7,7 @@
 int main(int ac, char **av)
 {
   //buffer[176];
-  int fd;
+  FILE *fd;
   unsigned int canary = fs:0x28;
 
   if(av != 2)
