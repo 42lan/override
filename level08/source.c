@@ -6,18 +6,14 @@
 
 void log_wrapper(FILE *fd, const char *message, const char *filename)
 {
-  //buffer[304]
+  char dst[300];
   unsigned int canary = fs:0x28;
-  $rbp-0x118 = fd;
-  $rbp-0x120 = message;
-  $rbp-0x128 = filename;
 
   strcpy(dst, message); //dst = 0x7fffffffe3b0
-  i = -1; //$rbp-0x130
   len = strlen(dst);
   dst[len] = '\0';
-  snprintf(dst, len, filename, );
-  dst[strcspn(dst, '\n')] = '\0';
+  snprintf(dst + len, !!!, !!!, filename);
+  dst[strcspn(dst, "\n")] = '\0';
   fprintf(fd, "LOG: %s\n", dst);
 
   // :( Check if the canary is died (if the value was modified). It is the sign to evacuate from the mine!
