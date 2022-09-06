@@ -7,12 +7,12 @@
 void log_wrapper(FILE *fd, const char *message, const char *filename)
 {
   char dst[300];
+  int lenDst;
   unsigned int canary = fs:0x28;
 
   strcpy(dst, message); //dst = 0x7fffffffe3b0
-  len = strlen(dst);
-  dst[len] = '\0';
-  snprintf(dst + len, !!!, !!!, filename);
+  lenDst = strlen(dst) - 1;
+  snprintf(dst + lenDst, 254 - lenDst, filename);
   dst[strcspn(dst, "\n")] = '\0';
   fprintf(fd, "LOG: %s\n", dst);
 
