@@ -24,10 +24,13 @@ void log_wrapper(FILE *fd, const char *message, const char *filename)
 int main(int ac, char **av)
 {
   //buffer[176];
-  FILE *fd;
+  char c;
+  char backup_filename[99];
   unsigned int canary = fs:0x28;
+  FILE *stream;
+  FILE *fd;
 
-  if(av != 2)
+  if(ac != 2)
   {
     printf("Usage: %s filename\n", av[0]);
     fd = fopen("./backups/.log", "w");
@@ -38,18 +41,26 @@ int main(int ac, char **av)
     exit(1);
   }
   log_wrapper(fd, "Starting back up: ", av[1]);
+  if ((fd = fopen(av[1], "r")) == 0)
+  {
+    printf("ERROR: Failed to open %s\n", av[1]);
+    exit(1);
+  }
+  strcpy(backup_filename, "./backups/");
+  strncat(backup_filename, av[1], 99 - strlen(backup_filename));
 
-  file = fopen(av[1], "r");
-  if(file == 0)
-  path_join = strncat("./backups/", av[1], strlen);
-  fd = open(path_join);
-  if(fd == 0)
+  // 0x0c1 = 193 = 0301 = 00001 | 00100 | 00200 = O_WRONLY | O_CREAT | O_EXCL (/usr/include/asm-generic/fcntl.h)
+  // 0x1b0 = 432 = 0660 = 00400 | 00200 | 00040 | 00020 = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP (/usr/include/linux/stat.h)
+  stream = open(backup_filename, O_WRONLY | O_CREAT | O_EXCL, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP);
+  if(stream == 0)
   {
     printf("ERROR: Failed to open %s%s\n", "./backups/", av[1]);
     exit(1);
   }
-  fgetc();
-  log_wrapper(fd, "Finished back up ", "backups/");
+  while((c = fgetc(stream)) != EOF)
+    write(fd, &c, 1);
+  log_wrapper(fd, "Finished back up ", av[1]);
+  fclose(stream);
   fclose(fd);
   // :( Check if the canary is died (if the value was modified). It is the sign to evacuate from the mine!
   if((canary ^ fs:0x28) != 0)
