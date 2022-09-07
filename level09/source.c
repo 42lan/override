@@ -2,6 +2,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void secret_backdoor(void)
+{
+  char command[128];
+
+  fgets(command, 128, stdin);
+  system(command);
+}
+
 int main(void)
 {
   puts(
