@@ -12,7 +12,7 @@ void secret_backdoor(void)
 
 void set_msg(char *buffer)
 {
-  char str[1024] = {0};
+  char str[128] = {0};
 
   puts(">: Msg @Unix-Dude");
   printf(">>: ");
