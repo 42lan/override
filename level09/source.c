@@ -12,6 +12,12 @@ void secret_backdoor(void)
 
 void set_msg(char *buffer)
 {
+  char str[1024] = {0};
+
+  puts(">: Msg @Unix-Dude");
+  printf(">>: ");
+  fgets(str, 1024, stdin);
+  strncpy(buffer, str, 75);
 }
 
 void set_username(char *buffer)
