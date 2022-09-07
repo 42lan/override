@@ -23,15 +23,15 @@ void set_msg(char *buffer)
 void set_username(char *buffer)
 {
   int i = -1;
-  char str[128] = {0};
   //str[160] 0x7fffffffe400
+  char username[128] = {0};
 
   puts(">: Enter your username");
   printf(">>: ");
-  fgets(buffer, 128, stdin);
-  while(++i <= 40 && str[i])
-    buffer[i + 140] = str[i];
-  printf(">: Welcome, %s", buffer + 140);
+  fgets(username, 128, stdin);
+  while(++i <= 40 && username[i])
+    buffer[i + 140] = username[i];
+  printf(">: Welcome, %s", &buffer[140]);
 }
 
 void handle_msg(void)
