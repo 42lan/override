@@ -23,7 +23,6 @@ void set_msg(char *buffer)
 void set_username(char *buffer)
 {
   int i = -1;
-  //str[160] 0x7fffffffe400
   char username[128] = {0};
 
   puts(">: Enter your username");
@@ -36,8 +35,8 @@ void set_username(char *buffer)
 
 void handle_msg(void)
 {
-  //buffer[192]
   char buffer[180];
+
   memset(buffer + 140, 0, 40);
   set_username(buffer);
   set_msg(buffer);
