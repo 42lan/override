@@ -35,7 +35,10 @@ void set_username(char *buffer)
 
 void handle_msg(void)
 {
-  char buffer[180];
+  char buffer[184];
+  // 140 bytes message
+  //  40 bytes username
+  //   4 bytes message length (140 bytes by default)
 
   memset(buffer + 140, 0, 40);
   set_username(buffer);
