@@ -21,10 +21,10 @@ unsigned int get_unum(void)
 {
   unsigned int uint = 0;
 
-	fflush(stdout);
-	scanf("%u", uint);
-	clear_stdin();
-	return(uint);
+  fflush(stdout);
+  scanf("%u", uint);
+  clear_stdin();
+  return(uint);
 }
 
 void prog_timeout(void)

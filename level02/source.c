@@ -17,8 +17,8 @@ int main()
     exit(1);
   }
   len = fread(pass, 1, 41, fd);
-	i = strcspn(pass, "\n");
-	pass[i] = '\0';
+  i = strcspn(pass, "\n");
+  pass[i] = '\0';
   if (len != 41)
   {
     fwrite("ERROR: failed to read password file\n", 1, 36, stderr);
