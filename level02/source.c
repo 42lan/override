@@ -50,7 +50,7 @@ int main()
   }
   else
   {
-    printf(username);
+    printf(username); // format string attack
     printf(" does not have access!");
     exit(1);
   }
