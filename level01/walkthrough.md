@@ -135,7 +135,7 @@ nope, incorrect password...
    0x08048574 <+164>:   call   0x8048370 <fgets@plt>     // fgets(user_pass, 100, stdin);
 ```
 
-To find offset, generate a string of 100 bytes legth using (BOEIPOSG)[https://projects.jason-rush.com/tools/buffer-overflow-eip-offset-string-generator/).
+To find offset, generate a string of 100 bytes legth using [BOEIPOSG](https://projects.jason-rush.com/tools/buffer-overflow-eip-offset-string-generator/).
 ```nasm
 (gdb) start
 Temporary breakpoint 1 at 0x80484d5
