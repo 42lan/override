@@ -13,7 +13,7 @@ int verify_user_pass(const char *user_pass)
 int verify_user_name(void)
 {
   puts("verifying username....\n");
-  if (memcmp(user_pass, "dat_wil", 7) == 0) // Compare first 7 bytes
+  if (memcmp(a_user_name, "dat_wil", 7) == 0) // Compare first 7 bytes
     return(0); // Valid username
   return(1); // Invalid username
 }
