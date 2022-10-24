@@ -4,7 +4,6 @@
 
 int main()
 {
-  //stack frame = 288 (0x120)
   char pass[40] = {0};
   char username[] = {0};
   char password[] = {0};
@@ -24,7 +23,6 @@ int main()
   if (len != 41)
   {
     fwrite("ERROR: failed to read password file\n", 1, 36, stderr);
-    //fwrite("ERROR: failed to read password file\n", 1, 36, stderr);
     exit(1);
   }
   fclose(fd);
@@ -35,12 +33,12 @@ int main()
 
   printf("--[ Username: ");
   fgets(username, 100, stdin);
-  i = strcspn(username, "\n"); // return 6 O_o
+  i = strcspn(username, "\n");
   username[i] = '\0';
 
   printf("--[ Password: ");
   fgets(password, 100, stdin);
-  i = strcspn(password, "\n"); // return 4
+  i = strcspn(password, "\n");
   password[i] = '\0';
 
   puts("*****************************************");
