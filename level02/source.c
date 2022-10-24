@@ -51,7 +51,7 @@ int main()
   }
   else
   {
-    printf(username)
+    printf(username);
     printf(" does not have access!");
     exit(1);
   }
