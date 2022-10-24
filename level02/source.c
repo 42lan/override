@@ -8,6 +8,7 @@ int main()
   char pass[40] = {0};
   char username[] = {0};
   char password[] = {0};
+  int i;
   int len;
   FILE *fd;
 
