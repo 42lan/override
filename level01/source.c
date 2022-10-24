@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
+// store dat_wil + shellcode
 char a_user_name[100];
 
 int verify_user_pass(const char *user_pass)
@@ -27,7 +28,7 @@ int main(void)
 
   puts("********* ADMIN LOGIN PROMPT *********");
   printf("Enter Username: ");
-  fgets(a_user_name, 256, stdin);
+  fgets(a_user_name, 256, stdin); // read more characters than buffer size: store shellcode in a_user_name
   ret = verify_user_name();
   if (ret != 0)
   {
@@ -35,7 +36,7 @@ int main(void)
     return(1);
   }
   puts("Enter Password: ");
-  fgets(user_pass, 100, stdin);
+  fgets(user_pass, 100, stdin); // read more character that buffer size: ret2shellcode
   ret = verify_user_pass(user_pass);
   if (ret == 0 || ret != 0)
   {
