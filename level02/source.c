@@ -14,7 +14,7 @@ int main()
   fd = fopen("/home/users/level03/.pass", "r");
   if (fd == 0)
   {
-    fwrite("ERROR: failed to open password file\n", 1, 24, stderr);
+    fwrite("ERROR: failed to open password file\n", 1, 36, stderr);
     exit(1);
   }
   len = fread(pass, 1, 41, fd);
