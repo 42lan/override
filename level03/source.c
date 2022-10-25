@@ -35,6 +35,9 @@ void decrypt(int operand)
   char  str[] = "Q}|u`sfg~sf{}|a3\0";
   int   len = strlen(str);
 
+  /*
+  ** Knowing key, XOR operation can be easely reversed
+  */
   for (i = 0; i < len; i++)
     str[i] = operand ^ str[i];
   if (memcmp(str, "Congratulations!", 17) == 0)

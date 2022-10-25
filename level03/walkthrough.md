@@ -28,6 +28,8 @@ Once logged it can be noted that RELRO, STACK CANARY and NX are enabled.
 
 `decrypt()` either opens a new process with shell or prints an error message. In order to run a shell, the sting ``"Q}|u`sfg~sf{}|a3\0"`` must be equal to `"Congratulations!"` once it is xored with value of `operand` which is difference between `0x1337d00d` and user input.
 
+Knowing which "switch case" needs to be used and the key, XOR operation can be easely reversed.
+
 <details>
 <summary>To determine which decimal value needs to be entered run Python script and try one of value from 0 to 20</summary>
 
