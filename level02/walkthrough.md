@@ -1,3 +1,7 @@
+## TLTR;
+Format string reading (attack) - read the content of `pass` buffer on the stack
+***
+
 Log into level02
 ```shell
 ┌──$ [~/42/2022/override]
