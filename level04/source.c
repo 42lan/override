@@ -52,7 +52,7 @@ int main(void)
     // Indicate that the process making this request should be traced
     ptrace(PT_TRACE_ME, NULL, NULL, NULL);
     puts("Give me some shellcode, k");
-    gets(str);
+    gets(str); // enables arbitrarily change a running program's functionality through a buffer overflow attack
   }
   else
   {
