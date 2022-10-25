@@ -10,7 +10,7 @@ void clear_stdin(void)
     c = getchar();
     if (c == '\n')
       break ;
-  } while (c != 0xff)
+  } while (c != 0xff);
 }
 
 unsigned int get_unum(void)
