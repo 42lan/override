@@ -18,7 +18,7 @@ unsigned int get_unum(void)
   unsigned int uint = 0;
 
   fflush(stdout);
-  scanf("%u", uint);
+  scanf("%u", &uint);
   clear_stdin();
   return uint;
 }
@@ -66,7 +66,7 @@ int main(void)
   puts("*\t\tlevel03\t\t**");
   puts("***********************************");
   printf("Password:");
-  scanf("%d", password);
+  scanf("%d", &password);
   test(password, 0x1337d00d);
   return(0);
 }
