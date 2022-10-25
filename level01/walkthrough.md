@@ -1,6 +1,4 @@
-## TLTR;
-Stack buffer overflow and ret2shellcode
-***
+# Stack buffer overflow and ret2shellcode/ret2libc
 
 ```shell
 ┌──$ [~/42/2022/override]

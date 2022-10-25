@@ -1,6 +1,4 @@
-## TLTR;
-Hijacking relative path | Exploit symbolic link
-***
+# Hijacking relative path / Exploit symbolic link
 
 ```sh
 ┌──$ [~/42/2022/override]

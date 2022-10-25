@@ -1,6 +1,4 @@
-## TLTR;
-Reverse the "cryptographic" algorithm
-***
+# Reverse the "cryptographic" algorithm
 
 Log into `level02`
 ```shell

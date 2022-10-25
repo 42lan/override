@@ -1,6 +1,4 @@
-## TLTR;
-The program uses hard-coded constants.
-***
+# Hard-coded constant
 
 Log into level00
 ```shell

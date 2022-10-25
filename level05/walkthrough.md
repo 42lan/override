@@ -1,4 +1,4 @@
-# Format String Attack
+# Format string attack
 
 ```shell
 ┌──$ [~/42/2022/override]

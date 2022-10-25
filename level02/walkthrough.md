@@ -1,6 +1,4 @@
-## TLTR;
-Format string reading (attack) - read the content of `pass` buffer on the stack
-***
+# Format string reading (attack)
 
 Log into level02
 ```shell
