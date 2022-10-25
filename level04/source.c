@@ -22,7 +22,7 @@ unsigned int get_unum(void)
   unsigned int uint = 0;
 
   fflush(stdout);
-  scanf("%u", uint);
+  scanf("%u", &uint);
   clear_stdin();
   return(uint);
 }
