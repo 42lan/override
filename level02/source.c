@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-int main()
+int main(void)
 {
   char pass[40] = {0};
   char username[] = {0};
