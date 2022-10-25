@@ -28,7 +28,9 @@ Once logged it can be noted that RELRO, STACK CANARY and NX are enabled.
 
 `decrypt()` either opens a new process with shell or prints an error message. In order to run a shell, the sting ``"Q}|u`sfg~sf{}|a3\0"`` must be equal to `"Congratulations!"` once it is xored with value of `operand` which is difference between `0x1337d00d` and user input.
 
-To determine which decimal value needs to be entered run Python script:
+<details>
+<summary>To determine which decimal value needs to be entered run Python script and try one of value from 0 to 20</summary>
+
 ```python
 level03@OverRide:~$ python
 Python 2.7.3 (default, Jun 22 2015, 19:33:41)
@@ -59,6 +61,56 @@ Type "help", "copyright", "credits" or "license" for more information.
 19 322424826
 20 322424825
 ```
+</details>
+
+<details>
+<summary>Or run C program which reverse the algorithme</summary>
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main(void)
+{
+  int i;
+  int j;
+  char str[] = "Q}|u`sfg~sf{}|a3\0";
+  int len = strlen(str);
+
+  for (j = 0; j <= 20; j++)
+  {
+    char  buff[20] = {0};
+    for (i = 0; i < len; i++)
+      buff[i] = j ^ str[i];
+    printf("%2d %s\n", j, buff);
+  }
+}
+```
+```shell
+level03@OverRide:/tmp$ gcc main.c && ./a.out
+0 Q}|u`sfg~sf{}|a3
+1 P|}targfrgz|}`2
+2 S~wbqde|qdy~c1
+3 R~vcped}pex~b0
+4 Uyxqdwbczwbyxe7
+5 Txypevcb{vc~xyd6
+6 W{zsfu`axu`}{zg5
+7 Vz{rgta`yta|z{f4
+8 Yut}h{nov{nsuti;
+9 Xtu|izonwzortuh:
+10 [wvjylmtylqwvk9
+11 Zvw~kxmluxmpvwj8
+12 ]qpyljkrjwqpm?
+13 \pqxm~kjs~kvpql>
+14 _sr{n}hip}husro=
+15 ^rszo|ihq|itrsn<
+16 Amlepcvwncvkmlq#
+17 @lmdqbwvobwjlmp"
+18 Congratulations!
+19 Bnofs`utm`uhnor
+20 Eihatgrsjgroihu'
+```
+</details>
 
 ## Exploit
 ```shell
