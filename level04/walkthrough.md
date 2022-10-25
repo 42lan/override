@@ -18,8 +18,9 @@ Partial RELRO   No canary found   NX disabled   No PIE          No RPATH   No RU
 ```
 Program creates a new (child) process in which it gets user input and store it in local array.
 
-`/usr/include/linux/prctl.h` contains defined values for `prctl()`
-`/usr/include/linux/ptrace.h` contains defined values for `ptrace()`
+> `/usr/include/linux/prctl.h` contains defined values for `prctl()`
+>
+> `/usr/include/linux/ptrace.h` contains defined values for `ptrace()`
 
 
 Run the executable in background mode
