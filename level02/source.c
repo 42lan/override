@@ -4,9 +4,9 @@
 
 int main(void)
 {
-  char pass[40] = {0};
-  char username[] = {0};
-  char password[] = {0};
+  char filepass[40] = {0}; // 0x7fffffffe530
+  char username[96] = {0}; // 0x7fffffffe560
+  char userpass[96] = {0}; // 0x7fffffffe4c0
   int i;
   int len;
   FILE *fd;
@@ -17,9 +17,9 @@ int main(void)
     fwrite("ERROR: failed to open password file\n", 1, 36, stderr);
     exit(1);
   }
-  len = fread(pass, 1, 41, fd);
-  i = strcspn(pass, "\n");
-  pass[i] = '\0';
+  len = fread(filepass, 1, 41, fd);
+  i = strcspn(filepass, "\n");
+  filepass[i] = '\0';
   if (len != 41)
   {
     fwrite("ERROR: failed to read password file\n", 1, 36, stderr);
@@ -37,12 +37,12 @@ int main(void)
   username[i] = '\0';
 
   printf("--[ Password: ");
-  fgets(password, 100, stdin);
-  i = strcspn(password, "\n");
-  password[i] = '\0';
+  fgets(userpass, 100, stdin);
+  i = strcspn(userpass, "\n");
+  userpass[i] = '\0';
 
   puts("*****************************************");
-  if (strncmp(pass, password, 41) == 0)
+  if (strncmp(filepass, userpass, 41) == 0)
   {
     printf("Greetings, %s!\n", username);
     system("/bin/sh");
