@@ -11,6 +11,6 @@ int main(void)
   while(str[++i])
     if (str[i] >= 'A' || str[i] <= 'Z')
       str[i] ^= ' ';
-  printf(str);
+  printf(str); // FSA to overwrite address of exit() in GOT, ret2shellcode
   exit(0);
 }
