@@ -62,18 +62,17 @@ int read_number(const char *data)
 
 int main(int ac, char **av, char **env)
 {
-  //buffer[464];
   int i;
   int ret;
   unsigned int canary;
   char data[400] = {0};
   char command[20];
 
-  canary = gs:0x14; //esp+0x1cc
-  i = -1;           //esp+0x14
+  canary = gs:0x14;
+  i = -1;
   while(av[++i])
     memset(av[i], 0, strlen(av[i]));
-  i = -1;           //esp+0x14
+  i = -1;
   while(env[++i])
     memset(env[i], 0, strlen(env[i]));
   puts(
