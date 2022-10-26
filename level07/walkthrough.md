@@ -18,10 +18,18 @@ RELRO           STACK CANARY      NX            PIE             RPATH      RUNPA
 Partial RELRO   Canary found      NX disabled   No PIE          No RPATH   No RUNPATH   /home/users/level07/level07
 ```
 
-The program wipes arguments and environment variables. It creates a static array of 400 bytes fo data of storage. It executes a loop prompting the user to enter the command to execute: `store`, `read` or `quit`.
+The program wipes arguments and environment variables. 
+
+It creates a static array of 400 bytes fo data of storage. 
+
+It executes a loop prompting the user to enter the command to execute: `store`, `read` or `quit`.
+
 `store_number()` receives a pointer to `data` array and store a number to the given index. Indexes which are modulo 3 and 183rd index are reserved and cannot be assignable.
+
 `read_number()` receive a pointer to `data` array and read the number stored in the given index.
+
 In case of successful execution of command, `main()` prints corresponding message, as well as for unsuccessful execution.
+
 The last instruction zeroing out memory of `command` and it loop again asking the user a command.
 
 `read_number()` do not check if input index, so it allow to read out of boundaries of `data` array. Over 694rd index, program crash with segfault.
@@ -104,6 +112,7 @@ In the binary representation (32 bits), value `114` looks like:
 0000 0000   0000 0000   0000 0000   0111 0010
 ```
 Shift operation is destructive. Excess bits shifted off to the left are discarded, and zero bits are shifted in from the right.
+
 Knowing that `store_number()` use rigth-shift operation (multiplication x4) `data[index << 2] = number`, first two MSB bits can be set switch on.
 
 In the first time it will make pass the condition %3, and in the second time at the time of <<2 will result in index 456
