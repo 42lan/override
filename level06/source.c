@@ -47,7 +47,7 @@ int auth(char *login, unsigned int serial)
   len = strnlen(login, ' ');
   if(len > 5)
   {
-    ret = ptrace(PTRACE_TRACEME, NULL, 1, NULL);
+    ret = ptrace(PTRACE_TRACEME, NULL, 1, NULL); // Bypass ptrace() by changing EIP to auth:58
     if(ret == -1)
     {
       puts("\033[32m.---------------------------.");
@@ -56,7 +56,6 @@ int auth(char *login, unsigned int serial)
       return(1);
     }
     leetseeded = (login[3] ^ 0x1337) + 0x5eeded;
-
     i = 0;
     while(i < len)
     {
@@ -65,8 +64,7 @@ int auth(char *login, unsigned int serial)
       //result += (((login[i] ^ leetseeded) * 0x88233b2b) % 0x539);
       i++;
     }
-
-    if(serial == result)
+    if(serial == result) // Break and examine result
       return(0);
   }
   return(1);
