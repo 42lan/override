@@ -10,7 +10,7 @@ void log_wrapper(FILE *fd, const char *message, const char *filename)
   int lenDst;
   unsigned int canary = fs:0x28;
 
-  strcpy(dst, message); //dst = 0x7fffffffe3b0
+  strcpy(dst, message);
   lenDst = strlen(dst) - 1;
   snprintf(dst + lenDst, 254 - lenDst, filename);
   dst[strcspn(dst, "\n")] = '\0';
@@ -23,7 +23,6 @@ void log_wrapper(FILE *fd, const char *message, const char *filename)
 
 int main(int ac, char **av)
 {
-  //buffer[176];
   char c;
   char backup_filename[99];
   unsigned int canary = fs:0x28;
