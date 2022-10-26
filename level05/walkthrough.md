@@ -54,6 +54,7 @@ gdb-peda$ x/25wx 0xffffd698
 ```
 
 The issue is that `printf()` is missuded which expose the application to the Format String Attack.
+
 FSA allows to apply overwrite of GOT table where address of `exit()` is stored.
 
 Determine addresses of `system()` and `"/bin/sh"` as well as where `exit()` is stored.
@@ -93,6 +94,7 @@ aaaabbbb00000064 f7fcfac0 f7ec3add ffffd6df ffffd6de 00000000 ffffffff ffffd764 
 ```
 
 Export [shellcode](http://shell-storm.org/shellcode/files/shellcode-811.php) into environment variables and  retrieve the address where it is lay.
+
 Devide the address per byte  and calculate for each number of characters that need to be printen by `%x` and written by `%n`.
 ```
 0xffffdedb
