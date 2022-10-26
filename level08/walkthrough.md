@@ -20,7 +20,9 @@ Full RELRO      Canary found      NX disabled   No PIE          No RPATH   No RU
 
 The program opens a file and creates its backup into `/home/users/level08/backups` by writing byte per byte.
 
-The issue is that `./backups/` folder name is used as relative path. Relative path change depending on the working directory’s of the current location. So the relative path can be hijacked by changing working directory to `/tmp` and creating a new `./backups/` folder containing absolute path of `.pass` of `level09`.
+The issue is that `./backups/` folder name is used as relative path. Relative path change depending on the working directory’s of the current location.
+
+So the relative path can be hijacked by changing working directory to `/tmp` and creating a new `./backups/` folder containing absolute path of `.pass` of `level09`.
 
 Other way is to create a symbolic link to `/home/users/level09/.pass` and pass to as argument to the binary.
 
