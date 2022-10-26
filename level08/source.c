@@ -45,7 +45,7 @@ int main(int ac, char **av)
     printf("ERROR: Failed to open %s\n", av[1]);
     exit(1);
   }
-  strcpy(backup_filename, "./backups/");
+  strcpy(backup_filename, "./backups/"); // prepare to use relative path that can be hijacked
   strncat(backup_filename, av[1], 99 - strlen(backup_filename));
 
   // 0x0c1 = 193 = 0301 = 00001 | 00100 | 00200 = O_WRONLY | O_CREAT | O_EXCL (/usr/include/asm-generic/fcntl.h)
