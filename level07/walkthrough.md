@@ -24,7 +24,9 @@ It creates a static array of 400 bytes fo data of storage.
 
 It executes a loop prompting the user to enter the command to execute: `store`, `read` or `quit`.
 
-`store_number()` receives a pointer to `data` array and store a number to the given index. Indexes which are modulo 3 and 183rd index are reserved and cannot be assignable.
+`store_number()` receives a pointer to `data` array and store a number to the given index.
+
+Indexes which are modulo 3 and 183rd index are reserved and cannot be assigned.
 
 `read_number()` receive a pointer to `data` array and read the number stored in the given index.
 
@@ -105,6 +107,7 @@ While reading/storing a number from data storage, the index is used to determine
 data[index<<2] = number
 ```
 On writting to index 1 it will write to `data[1 << 2] = number`, same as `data[4] = number` .
+
 On writting to index 114 it will write to `data[114 << 2] = number`, same as `data[456] = number` .
 
 In the binary representation (32 bits), value `114` looks like:
