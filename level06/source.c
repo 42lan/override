@@ -13,7 +13,7 @@ void clear_stdin(void)
     c = getchar();
     if (c == '\n')
       break ;
-  } while (c != 0xff)
+  } while (c != 0xff);
 }
 
 unsigned int get_unum(void)
@@ -39,6 +39,8 @@ void enable_timeout_cons(void)
 
 int auth(char *login, unsigned int serial)
 {
+  int i;
+  int ret;
   size_t len;
 
   login[strcspn(login, "\n")] = '\0';
