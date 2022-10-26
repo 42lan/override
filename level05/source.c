@@ -3,14 +3,14 @@
 
 int main(void)
 {
-  char str[100]; // esp+0x28
-  int i;         // esp+1c
+  char str[100];
+  int i;
 
   i = -1;
   fgets(str, 100, stdin);
   while(str[++i])
     if (str[i] >= 'A' || str[i] <= 'Z')
-      str[i] ^= ' '; // 0x20;
+      str[i] ^= ' ';
   printf(str);
   exit(0);
 }
