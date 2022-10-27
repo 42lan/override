@@ -36,7 +36,7 @@ int main(void)
     return(1);
   }
   puts("Enter Password: ");
-  fgets(user_pass, 100, stdin); // read more character that buffer size: ret2shellcode
+  fgets(user_pass, 100, stdin); // read more character that buffer size: overwrite EIP to ret2shellcode or ret2libc
   ret = verify_user_pass(user_pass);
   if (ret == 0 || ret != 0)
   {
