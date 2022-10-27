@@ -53,7 +53,7 @@ void test(const int password, const int leetdood)
   x = (leetdood - password) << 2;
   switch (x)
   {
-    case 1 ... 21:
+    case 1 ... 21: // Result of x needs to be equal 1 through 21
       decrypt(x);
       break;
     default:
