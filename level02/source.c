@@ -50,7 +50,7 @@ int main(void)
   }
   else
   {
-    printf(username); // format string attack
+    printf(username); // format string reading (attack) allow to read content of filepass on stack
     printf(" does not have access!");
     exit(1);
   }
