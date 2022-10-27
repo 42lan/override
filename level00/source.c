@@ -3,7 +3,7 @@
 
 int main(void)
 {
-  int input; // 32 bytes
+  int input;
 
   puts("***********************************");
   puts("* \t     -Level00 -\t\t  *");
