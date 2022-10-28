@@ -44,7 +44,9 @@ int store_number(char *data)
     puts(" *** ERROR! ***");
     return(1);
   }
-  data[index << 2] = number;
+  // Determine the absolute address where to store the number
+  // Write out of boundaries to overwrite saved EIP in main()
+  data[index << 2] = number; // shift is destructive
   return(0);
 }
 
@@ -55,7 +57,7 @@ int read_number(const char *data)
 
   printf(" Index: ");
   index = get_unum();
-  number = data + (index << 2);
+  number = data + (index << 2); // read out of boundaries to see saved EIP in main()
   printf(" Number at data[%u] is %u\n", index, number);
   return(0);
 }
