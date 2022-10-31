@@ -1,14 +1,13 @@
 # Reverse the "cryptographic" algorithm
 
-Log into `level02`
 ```shell
 ┌──$ [~/42/2022/override]
-└─>  ssh -p 4242 192.168.56.101 -l level02
-     ____                  ____  _     __   
-    / __ \_   _____  _____/ __ \(_)___/ /__ 
-   / / / / | / / _ \/ ___/ /_/ / / __  / _ \
-  / /_/ /| |/ /  __/ /  / _, _/ / /_/ /  __/
-  \____/ |___/\___/_/  /_/ |_/_/\__,_/\___/ 
+└─>  ssh 192.168.56.101 -p 4242 -l level02
+           ____                  ____  _     __
+          / __ \_   _____  _____/ __ \(_)___/ /__
+         / / / / | / / _ \/ ___/ /_/ / / __  / _ \
+        / /_/ /| |/ /  __/ /  / _, _/ / /_/ /  __/
+        \____/ |___/\___/_/  /_/ |_/_/\__,_/\___/
 
                        Good luck & Have fun
 
@@ -18,6 +17,7 @@ level03@192.168.56.101's password: Hh74RPnuQ9sa5JAEXgNWCqz7sXGnh5J5M9KfPg3H
 RELRO           STACK CANARY      NX            PIE             RPATH      RUNPATH      FILE
 Partial RELRO   Canary found      NX enabled    No PIE          No RPATH   No RUNPATH   /home/users/level03/level03
 ```
+
 Once logged it can be noted that RELRO, STACK CANARY and NX are enabled.
 
 `main()` functon calls `test()` with two arguments, user input based on `%d` conversion specifier and a hard coded value `0x1337d00d`.

@@ -1,22 +1,23 @@
 # Hard-coded constant
 
-Log into level00
 ```shell
-[~/42/2022/override]$ ssh 192.168.56.102 -p 4242 -l level00
-     ____                  ____  _     __
-    / __ \_   _____  _____/ __ \(_)___/ /__
-   / / / / | / / _ \/ ___/ /_/ / / __  / _ \
-  / /_/ /| |/ /  __/ /  / _, _/ / /_/ /  __/
-  \____/ |___/\___/_/  /_/ |_/_/\__,_/\___/
+┌──$ [~/42/2022/override]
+└─>  ssh 192.168.56.101 -p 4242 -l level00
+           ____                  ____  _     __
+          / __ \_   _____  _____/ __ \(_)___/ /__
+         / / / / | / / _ \/ ___/ /_/ / / __  / _ \
+        / /_/ /| |/ /  __/ /  / _, _/ / /_/ /  __/
+        \____/ |___/\___/_/  /_/ |_/_/\__,_/\___/
 
                        Good luck & Have fun
 
-   To start, ssh with level00/level00 on 192.168.56.102:4242
-level00@192.168.56.102's password: level00
+   To start, ssh with level00/level00 on 192.168.56.101:4242
+level00@192.168.56.101's password: level00
 
 RELRO           STACK CANARY      NX            PIE             RPATH      RUNPATH      FILE
 Partial RELRO   No canary found   NX enabled    No PIE          No RPATH   No RUNPATH   /home/users/level00/level00
 ```
+
 An SUID binary is located in the home directory.
 ```shell
 level00@OverRide:~$ ls -l

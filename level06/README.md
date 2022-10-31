@@ -17,8 +17,8 @@ level06@192.168.56.101's password: h4GtNnaMs2kZFN92ymTr2DcJHAzMfzLW25Ep59mq
 RELRO           STACK CANARY      NX            PIE             RPATH      RUNPATH      FILE
 Partial RELRO   Canary found      NX enabled    No PIE          No RPATH   No RUNPATH   /home/users/level06/level06
 ```
-The program gets user input and open a new shell process after authentification based on `auth()` return.
 
+The program gets user input and open a new shell process after authentification based on `auth()` return.
 ```gdb
 level06@OverRide:~$ gdb -q ./level06
 Reading symbols from /home/users/level06/level06...(no debugging symbols found)...done.

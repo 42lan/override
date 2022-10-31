@@ -10,12 +10,14 @@
         \____/ |___/\___/_/  /_/ |_/_/\__,_/\___/
 
                        Good luck & Have fun
+
    To start, ssh with level00/level00 on 192.168.56.101:4242
 level04@192.168.56.101's password: kgv3tkEb9h2mLkRsPkXRfc2mHbjMxQzvb2FrgKkf
 
 RELRO           STACK CANARY      NX            PIE             RPATH      RUNPATH      FILE
 Partial RELRO   No canary found   NX disabled   No PIE          No RPATH   No RUNPATH   /home/users/level04/level04
 ```
+
 Program creates a new (child) process in which it gets user input and store it in local array.
 
 > `/usr/include/linux/prctl.h` contains defined values for `prctl()`

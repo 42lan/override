@@ -17,6 +17,7 @@ level05@192.168.56.101's password: 3v8QLcN5SAhPaZZfEasfmXdwyR59ktDEMAwHF3aN
 RELRO           STACK CANARY      NX            PIE             RPATH      RUNPATH      FILE
 No RELRO        No canary found   NX disabled   No PIE          No RPATH   No RUNPATH   /home/users/level05/level05
 ```
+
 Only one `main()` function is defined in the executable.
 It gets users input, decapitalize and print, following by exit with status 0.
 

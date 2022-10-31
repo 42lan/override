@@ -1,14 +1,13 @@
 # Format string reading (attack)
 
-Log into level02
 ```shell
 ┌──$ [~/42/2022/override]
-└─>  ssh -p 4242 192.168.56.101 -l level02
-     ____                  ____  _     __
-    / __ \_   _____  _____/ __ \(_)___/ /__
-   / / / / | / / _ \/ ___/ /_/ / / __  / _ \
-  / /_/ /| |/ /  __/ /  / _, _/ / /_/ /  __/
-  \____/ |___/\___/_/  /_/ |_/_/\__,_/\___/
+└─>  ssh 192.168.56.101 -p 4242 -l level02
+           ____                  ____  _     __
+          / __ \_   _____  _____/ __ \(_)___/ /__
+         / / / / | / / _ \/ ___/ /_/ / / __  / _ \
+        / /_/ /| |/ /  __/ /  / _, _/ / /_/ /  __/
+        \____/ |___/\___/_/  /_/ |_/_/\__,_/\___/
 
                        Good luck & Have fun
 
@@ -18,6 +17,7 @@ level02@192.168.56.101's password: PwBLgNa8p8MTKW57S7zxVAQCxnCpV8JqTTs9XEBv
 RELRO           STACK CANARY      NX            PIE             RPATH      RUNPATH      FILE
 No RELRO        No canary found   NX disabled   No PIE          No RPATH   No RUNPATH   /home/users/level02/level02
 ```
+
 The binary file located in home directory of `level02` is an 64-bit executable.
 ```shell
 level02@OverRide:~$ ls -l
