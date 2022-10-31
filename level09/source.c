@@ -17,7 +17,7 @@ void set_msg(char *buffer)
   puts(">: Msg @Unix-Dude");
   printf(">>: ");
   fgets(str, 1024, stdin);
-  strncpy(buffer, str, buffer+180);
+  strncpy(buffer, str, buffer+180); // overwrite RIP on offset +200
 }
 
 void set_username(char *buffer)
@@ -29,7 +29,7 @@ void set_username(char *buffer)
   printf(">>: ");
   fgets(username, 128, stdin);
   while(++i <= 40 && username[i])
-    buffer[i + 140] = username[i];
+    buffer[i + 140] = username[i]; // overwrite default value on buffer+180
   printf(">: Welcome, %s", &buffer[140]);
 }
 
@@ -41,8 +41,8 @@ void handle_msg(void)
   //   4 bytes message length (140 bytes by default)
 
   memset(buffer + 140, 0, 40);
-  set_username(buffer);
-  set_msg(buffer);
+  set_username(buffer); // overwrite default value of message length
+  set_msg(buffer); // overwrite saved RIP with @ of secret_backdoor()
   puts(">: Msg sent!");
 }
 
