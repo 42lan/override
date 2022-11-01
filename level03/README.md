@@ -28,27 +28,20 @@ Once logged it can be noted that RELRO, STACK CANARY and NX are enabled.
 
 Knowing which "switch case" needs to be used and the key, XOR operation can be easely reversed.
 
-<details>
-<summary>To determine which decimal value needs to be entered run Python script and try one of value from 0 to 20</summary>
+To determine which decimal value needs to be entered run [Python script](https://github.com/42lan/override/blob/main/level03/Ressources/switchCase.py) and try one of value from 0 to 20
 
-```python
-level03@OverRide:~$ python
-Python 2.7.3 (default, Jun 22 2015, 19:33:41)
-[GCC 4.6.3] on linux2
-Type "help", "copyright", "credits" or "license" for more information.
->>> for i in range(0x0, 0x15):
-...     print("%2d %d" % (i, 0x1337d00d-i))
-... 
- 0 322424845
- 1 322424844
- 2 322424843
- 3 322424842
- 4 322424841
- 5 322424840
- 6 322424839
- 7 322424838
- 8 322424837
- 9 322424836
+```shell
+level03@OverRide:~$ python /tmp/switchCase.py
+0 322424845
+1 322424844
+2 322424843
+3 322424842
+4 322424841
+5 322424840
+6 322424839
+7 322424838
+8 322424837
+9 322424836
 10 322424835
 11 322424834
 12 322424833
@@ -57,60 +50,37 @@ Type "help", "copyright", "credits" or "license" for more information.
 15 322424830
 16 322424829
 17 322424828
-18 322424827 *
+18 322424827
 19 322424826
 20 322424825
 ```
-</details>
 
-<details>
-<summary>Or run C program which reverse the algorithme</summary>
+Or run [C program](https://github.com/42lan/override/blob/main/level03/Ressources/reverse.c) which reverse the algorithme
 
-```c
-#include <stdio.h>
-#include <string.h>
-
-int main(void)
-{
-  int i;
-  int j;
-  char str[] = "Q}|u`sfg~sf{}|a3\0";
-  int len = strlen(str);
-
-  for (j = 0; j <= 20; j++)
-  {
-    char  buff[20] = {0};
-    for (i = 0; i < len; i++)
-      buff[i] = j ^ str[i];
-    printf("%2d %s\n", j, buff);
-  }
-}
-```
 ```shell
-level03@OverRide:/tmp$ gcc main.c && ./a.out
-0 Q}|u`sfg~sf{}|a3
-1 P|}targfrgz|}`2
-2 S~wbqde|qdy~c1
-3 R~vcped}pex~b0
-4 Uyxqdwbczwbyxe7
-5 Txypevcb{vc~xyd6
-6 W{zsfu`axu`}{zg5
-7 Vz{rgta`yta|z{f4
-8 Yut}h{nov{nsuti;
-9 Xtu|izonwzortuh:
-10 [wvjylmtylqwvk9
-11 Zvw~kxmluxmpvwj8
-12 ]qpyljkrjwqpm?
-13 \pqxm~kjs~kvpql>
-14 _sr{n}hip}husro=
-15 ^rszo|ihq|itrsn<
-16 Amlepcvwncvkmlq#
-17 @lmdqbwvobwjlmp"
-18 Congratulations!
-19 Bnofs`utm`uhnor
-20 Eihatgrsjgroihu'
+level03@OverRide:~$ gcc /tmp/reverse.c -o /tmp/reverse && /tmp/reverse
+0 322424845 Q}|u`sfg~sf{}|a3
+1 322424844 P|}targfrgz|}`2
+2 322424843 S~wbqde|qdy~c1
+3 322424842 R~vcped}pex~b0
+4 322424841 Uyxqdwbczwbyxe7
+5 322424840 Txypevcb{vc~xyd6
+6 322424839 W{zsfu`axu`}{zg5
+7 322424838 Vz{rgta`yta|z{f4
+8 322424837 Yut}h{nov{nsuti;
+9 322424836 Xtu|izonwzortuh:
+10 322424835 [wvjylmtylqwvk9
+11 322424834 Zvw~kxmluxmpvwj8
+12 322424833 ]qpyljkrjwqpm?
+13 322424832 \pqxm~kjs~kvpql>
+14 322424831 _sr{n}hip}husro=
+15 322424830 ^rszo|ihq|itrsn<
+16 322424829 Amlepcvwncvkmlq#
+17 322424828 @lmdqbwvobwjlmp"
+18 322424827 Congratulations!
+19 322424826 Bnofs`utm`uhnor 
+20 322424825 Eihatgrsjgroihu'
 ```
-</details>
 
 ## Exploit
 ```shell
